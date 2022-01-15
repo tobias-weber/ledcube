@@ -18,10 +18,5 @@ class Animation {
         void renderNextFrame();
         // writes the next frame to the hardware
         void showNextFrame();
-    private:
-        Cube *_cube;
-        Writer *_writer;
-        const byte _serialData;
-        const byte _serialShift;
 };
 #endif

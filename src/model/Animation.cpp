@@ -7,14 +7,16 @@
 //include header for Writer
 #include "Writer.h"
 
-Cube *_cube;
-Writer *_writer;
-const byte _serialData = 13; // serial data pin
-const byte _serialShift = 13; // serial shift pin
+// include header for Animation
+#include "Animation.h"
 
-Animation:Animation() {
-  *_cube = new Cube();
-  *_writer = new Writer(*_cube, _serialData, _serialShift);
+const byte _serialData = 13; 
+const byte _serialShift = 13;
+
+Cube _cube;
+Writer _writer(_cube, _serialData, _serialShift);;
+
+Animation::Animation() {
 }
 
 // calculates the next frame and updates the cube object
@@ -23,7 +25,6 @@ void renderNextFrame() {
 }
 
 // writes the next frame to the hardware
-void showNectFrame() {
+void showNextFrame() {
   _writer.writeCube();
 }
-

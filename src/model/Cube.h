@@ -21,8 +21,6 @@ class Cube {
         // returns the byte of the led by unique led id (0-124)
         byte getLed(byte id);
         // color is returned in the format: 0b2b1g2g1r2r1
-        byte getColor(byte r, byte g, byte b);
-    private:
-        byte _cube[125];
+        byte getColor(byte r, byte g, byte b);     
 };
 #endif

@@ -7,44 +7,40 @@
 // include header for cube
 #include "Cube.h"
 
-private Cube *_cube;
-private byte _serialData;
-private byte _serialShift
-private byte _pwmCounter;
 
 // Writer
-Writer::Writer(Cube cube*, byte serialData, byte serialShift) {
-    *_cube = cube;
-    _serialData = serialData;
-    _serialShift = serialShift;
-    _pwmCounter = 0;
+Writer::Writer(Cube &cube, byte serialData, byte serialShift) {
+    _cube = cube;
+    this->_serialData = serialData;
+    this->_serialShift = serialShift;
+    this->_pwmCounter = 0;
 }
 
 // pushes the next pwm cycle of the current cube to the hardware
-Writer::writeCube() {
+void Writer::writeCube() {
   // reset counter if previous pwm cycle is over
   if (_pwmCounter > 2) {
     _pwmCounter = 0;
   }
   // increases pwm counter AFTER call
-  writeCube(_pwmCounter++)
+  writeCube(_pwmCounter++);
 }
 
 // pushes the specified pwm cacle of the current cube to hardware
-private Writer::writeCube(byte pwmCycle) {
+void Writer::writeCube(byte pwmCycle) {
   int ledIndex;
   byte ledData;
   byte redBits;
   byte greenBits;
   byte blueBits;
   // read led bytes in reverse order
-  for(ledIndex = 124, ledIndex >= 0, ledIndex--) {
+  for(ledIndex = 124; ledIndex >= 0; ledIndex--) {
     // read pwm encoded intensity levels of each color
-    ledData = Cube.getLed(ledIndex);
+    ledData = _cube.getLed(ledIndex);
     blueBits = ledData & 0b11;
-    ledBits = ledBits >> 2;
+    ledData = ledData >> 2;
     greenBits = ledData & 0b11;
-    ledBits = ledBits >> 2;
+    ledData = ledData >> 2;
     redBits = ledData & 0b11;
     // set leds according to curren pwm cycle
     if (blueBits > pwmCycle) {
@@ -66,15 +62,15 @@ private Writer::writeCube(byte pwmCycle) {
 }
 
 // pushes a single high bit to the hardware cube
-private Writer::pushHigh() {
+void Writer::pushHigh() {
   digitalWrite(_serialShift, LOW);
   digitalWrite(_serialData, HIGH);
-  digitalWrite(_serialShift, Hight);
+  digitalWrite(_serialShift, HIGH);
 }
 
 // pushes a single low bit to the hardware cube
-private Writer::pushLow() {
+void Writer::pushLow() {
   digitalWrite(_serialShift, LOW);
-  digitalWrite(_serialShift, Hight);
+  digitalWrite(_serialData, LOW);
+  digitalWrite(_serialShift, HIGH);
 }
-
