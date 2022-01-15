@@ -37,7 +37,7 @@ byte Cube::getLed(byte x, byte y, byte z) {
 }
 
 // returns the byte of the led by unique led id (0-124)
-byte getLed(byte id) {
+byte Cube::getLed(byte id) {
   return _cubearray[id];
 }
 

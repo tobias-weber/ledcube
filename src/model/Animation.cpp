@@ -20,11 +20,11 @@ Animation::Animation() {
 }
 
 // calculates the next frame and updates the cube object
-void renderNextFrame() {
+void Animation::renderNextFrame() {
   //TODO_ implementation
 }
 
 // writes the next frame to the hardware
-void showNextFrame() {
+void Animation::showNextFrame() {
   _writer.writeCube();
 }
