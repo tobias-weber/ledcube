@@ -9,10 +9,11 @@
 
 
 // Writer
-Writer::Writer(Cube &cube, byte serialData, byte serialShift) {
+Writer::Writer(Cube &cube, byte serialData, byte serialShift, byte mosfetLayer0) {
     _cube = cube;
     this->_serialData = serialData;
-    this->_serialShift = serialShift;
+    this->_serialShift = serialShift; 
+    this->_mosfetLayer0 = mosfetLayer0;
     this->_pwmCounter = 0;
 }
 
@@ -42,6 +43,8 @@ void Writer::writeCube(byte pwmCycle) {
     greenBits = ledData & 0b11;
     ledData = ledData >> 2;
     redBits = ledData & 0b11;
+    // select according layeer in cube
+    setLayer(ledIndex % 25);
     // set leds according to curren pwm cycle
     if (blueBits > pwmCycle) {
       pushHigh();
@@ -59,6 +62,12 @@ void Writer::writeCube(byte pwmCycle) {
       pushLow();
     }
   }
+}
+
+// activates the selected layer
+// int used to prevent cast from modulo operator
+void Writer::setLayer(int layer) {
+  //TODO: layer selection by mosFETs
 }
 
 // pushes a single high bit to the hardware cube

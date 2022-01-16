@@ -10,7 +10,7 @@
 
 class Writer {
     public:
-        Writer(Cube &cube, byte serialData, byte serialShift);
+        Writer(Cube &cube, byte serialData, byte serialShift, byte mosfetLayer0);
         // writes the current state of the cube object to the hardware
         void writeCube();
         // resets the writers pwm cycle counter
@@ -26,11 +26,15 @@ class Writer {
         byte _serialData;
         // pin used for serial shift
         byte _serialShift;
+        // pin used for first mosfet (layer 0)
+        byte _mosfetLayer0;
         // writes the nth pwm cycle to the hardware
         void writeCube(byte cycleCount);
         // pushes a single high bit to the hardware cube
         void pushHigh();
         // pushes a single low bit to the hardware cube
         void pushLow();
+        // activates the specified layer
+        void setLayer(int layer);
 };
 #endif

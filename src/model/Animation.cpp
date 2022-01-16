@@ -10,13 +10,13 @@
 // include header for Animation
 #include "Animation.h"
 
-const byte _serialData = 13; 
-const byte _serialShift = 13;
-
 Cube _cube;
-Writer _writer(_cube, _serialData, _serialShift);;
 
-Animation::Animation() {
+Animation::Animation(byte serialData, byte serialShift, byte layer0) {
+  this->_serialData = serialData;
+  this->_serialShift = serialShift;
+  this->_mosfetLayer0 = layer0;
+  this->_writer = new Writer(_cube, _serialData, _serialShift, _mosfetLayer0);
 }
 
 // calculates the next frame and updates the cube object
@@ -26,5 +26,5 @@ void Animation::renderNextFrame() {
 
 // writes the next frame to the hardware
 void Animation::showNextFrame() {
-  _writer.writeCube();
+  _writer->writeCube();
 }
