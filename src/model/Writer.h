@@ -10,7 +10,9 @@
 
 class Writer {
     public:
-        Writer(Cube &cube, byte serialData, byte serialShift, byte mosfetLayer0);
+        Writer(byte serialData, byte serialShift, byte mosfetLayer0);
+        // assigns the cube to the writer
+        void assignCube(Cube* cube);
         // writes the current state of the cube object to the hardware
         void writeCube();
         // resets the writers pwm cycle counter
@@ -19,17 +21,13 @@ class Writer {
         byte getState();
     private:
         // pointer to the cube the writer is responsible for
-        Cube &_cube;
-        // current pwm cycle form 0 to 3 as byte
-        byte _pwmCounter;
+        Cube *_cube;
         // pin number of pin used for serial data
         byte _serialData;
         // pin used for serial shift
         byte _serialShift;
         // pin used for first mosfet (layer 0)
         byte _mosfetLayer0;
-        // writes the nth pwm cycle to the hardware
-        void writeCube(byte cycleCount);
         // pushes a single high bit to the hardware cube
         void pushHigh();
         // pushes a single low bit to the hardware cube

@@ -5,61 +5,34 @@
 #include "Writer.h"
 
 // include header for cube
-#include "Cube.h"
-
 
 // Writer
-Writer::Writer(Cube &cube, byte serialData, byte serialShift, byte mosfetLayer0) {
-    _cube = cube;
+Writer::Writer(byte serialData, byte serialShift, byte mosfetLayer0) {
     this->_serialData = serialData;
     this->_serialShift = serialShift; 
     this->_mosfetLayer0 = mosfetLayer0;
-    this->_pwmCounter = 0;
+}
+
+// assigns the cube to this writer
+void Writer::assignCube(Cube* cube){
+  _cube = cube;
 }
 
 // pushes the next pwm cycle of the current cube to the hardware
 void Writer::writeCube() {
-  // reset counter if previous pwm cycle is over
-  if (_pwmCounter > 2) {
-    _pwmCounter = 0;
-  }
-  // increases pwm counter AFTER call
-  writeCube(_pwmCounter++);
-}
-
-// pushes the specified pwm cacle of the current cube to hardware
-void Writer::writeCube(byte pwmCycle) {
   int ledIndex;
+  int colorIndex;
   byte ledData;
-  byte redBits;
-  byte greenBits;
-  byte blueBits;
   // read led bytes in reverse order
   for(ledIndex = 124; ledIndex >= 0; ledIndex--) {
     // read pwm encoded intensity levels of each color
-    ledData = _cube.getLed(ledIndex);
-    blueBits = ledData & 0b11;
-    ledData = ledData >> 2;
-    greenBits = ledData & 0b11;
-    ledData = ledData >> 2;
-    redBits = ledData & 0b11;
-    // select according layeer in cube
-    setLayer(ledIndex % 25);
-    // set leds according to curren pwm cycle
-    if (blueBits > pwmCycle) {
-      pushHigh();
-    } else {
-      pushLow();
-    }
-    if (greenBits > pwmCycle) {
-      pushHigh();
-    } else {
-      pushLow();
-    }
-    if (redBits > pwmCycle) {
-      pushHigh();
-    } else {
-      pushLow();
+    ledData = _cube->getLed(ledIndex);
+    for (colorIndex = 0; colorIndex < 6; colorIndex += 2) {
+      if (ledData & (1 << colorIndex)) {
+        pushHigh();
+      } else {
+        pushLow();
+      }
     }
   }
 }

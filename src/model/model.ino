@@ -2,37 +2,23 @@
 #include "Cube.h"
 #include "Writer.h"
 
-// pin out
-const byte FRAMERATE = 12; // framerate of the cube
-const byte SERIAL_DATA = 8; // pin used to output serial data
-const byte SERIAL_SHIFT = 9; // pin used to shift registers
-// pin the mosfet for the layer nr.0 is connected to
-// other layers use incrementing pin ids from layer0 onwards
-const byte LAYER0 = 10;
-
-float frameDelta;
-unsigned long startTime;
-Animation animation(SERIAL_DATA, SERIAL_SHIFT, LAYER0);
+// cube object representing the Cube
+Cube cube;
+// writer used to write cube to hardware
+const byte SERIAL_DATA = 13;
+const byte SERIAL_SHIFT = 14;
+const byte MOS_LAYER_0 = 1;
+Writer writer(SERIAL_DATA, SERIAL_SHIFT, MOS_LAYER_0);
+// animation to display
+Animation animation;
 
 void setup() {
-  frameDelta = 1/FRAMERATE;
+  animation.assignCube(&cube);
+  writer.assignCube(&cube);
+  animation.assignWriter(&writer);
 }
 
 void loop() {
-  startTime = millis();
   animation.renderNextFrame();
-  animation.showNextFrame(); // pwm cycle 0
-  animation.showNextFrame(); // pwm cycle 1
-  animation.showNextFrame(); // pwm cycle 2
-  animation.showNextFrame(); // pwm cycle 3
-  pace(startTime, millis());
+  animation.showNextFrame();
 }
-
-void pace(unsigned long startTime, unsigned long currentTime) {
-  if (frameDelta - (currentTime - startTime) > 0) {
-    delay(frameDelta - (currentTime - startTime));
-  }
-  
-}
-
-//@Tobi W: Ich ha din code nach src/cube.ccp gmoved

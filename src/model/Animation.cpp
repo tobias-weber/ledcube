@@ -1,29 +1,34 @@
-//include arduino default data types and functions
+// include arduino default data types and functions
 #include "Arduino.h"
 
-//include header for Cube
+// include header for Cube
 #include "Cube.h"
-
-//include header for Writer
-#include "Writer.h"
 
 // include header for Animation
 #include "Animation.h"
 
-Cube _cube;
+byte counter = 0;
 
-Animation::Animation(byte serialData, byte serialShift, byte layer0) {
-  this->_serialData = serialData;
-  this->_serialShift = serialShift;
-  this->_mosfetLayer0 = layer0;
-  this->_writer = new Writer(_cube, _serialData, _serialShift, _mosfetLayer0);
+// contructor
+Animation::Animation() {
 }
 
+// assigns a cube to this animation
+void Animation::assignCube(Cube* cube){
+  _cube = cube;
+}
+// assigns a writer to this animation
+void Animation::assignWriter(Writer* writer) {
+  _writer = writer;
+}
 // calculates the next frame and updates the cube object
 void Animation::renderNextFrame() {
-  //TODO_ implementation
+    _cube->clearLeds();
+    int ledIdx;
+    for (ledIdx = 0; ledIdx < 120; ledIdx += 5) {
+      _cube->setLed(ledIdx + counter, 0b10101);
+    }
 }
-
 // writes the next frame to the hardware
 void Animation::showNextFrame() {
   _writer->writeCube();
