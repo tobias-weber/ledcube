@@ -23,6 +23,10 @@ void Animation::assignWriter(Writer* writer) {
 }
 // calculates the next frame and updates the cube object
 void Animation::renderNextFrame() {
+    if (millis() - _lastFrame < _frameDelta) {
+      return;
+    }
+    _lastFrame = millis();
     _cube->clearLeds();
     if (counter > 1270) {
       counter = 0;
@@ -39,5 +43,9 @@ void Animation::renderNextFrame() {
 }
 // writes the next frame to the hardware
 void Animation::showNextFrame() {
+  if (millis() - _lastRefresh < _refreshDelta) {
+      return;
+  }
+  _lastRefresh = millis();
   _writer->writeCube();
 }
