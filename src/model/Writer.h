@@ -10,7 +10,7 @@
 
 class Writer {
     public:
-        Writer(byte serialData, byte serialShift, byte mosfetLayer0);
+        Writer(byte serialData, byte serialShift, byte serialLatch, byte mosfetLayer0);
         // assigns the cube to the writer
         void assignCube(Cube* cube);
         // writes the current state of the cube object to the hardware
@@ -28,11 +28,15 @@ class Writer {
         byte _serialShift;
         // pin used for first mosfet (layer 0)
         byte _mosfetLayer0;
+        // pin used to trigger latch of shift register
+        byte _serialLatch;
         // pushes a single high bit to the hardware cube
         void pushHigh();
         // pushes a single low bit to the hardware cube
         void pushLow();
         // activates the specified layer
         void setLayer(int layer);
+        // enable latch of shift register
+        void triggerLatch();
 };
 #endif

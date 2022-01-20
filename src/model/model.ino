@@ -5,10 +5,11 @@
 // cube object representing the Cube
 Cube cube;
 // writer used to write cube to hardware
-const byte SERIAL_DATA = 13;
-const byte SERIAL_SHIFT = 14;
-const byte MOS_LAYER_0 = 1;
-Writer writer(SERIAL_DATA, SERIAL_SHIFT, MOS_LAYER_0);
+const byte SERIAL_DATA = 0;
+const byte SERIAL_SHIFT = 1;
+const byte SERIAL_LATCH = 2;
+const byte MOS_LAYER_0 = 3;
+Writer writer(SERIAL_DATA, SERIAL_SHIFT, SERIAL_LATCH, MOS_LAYER_0);
 // animation to display
 Animation animation;
 
