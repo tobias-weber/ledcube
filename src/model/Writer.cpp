@@ -25,10 +25,15 @@ void Writer::writeCube() {
   int colorIndex;
   byte ledData;
   // read led bytes in reverse order
-  for(ledIndex = 124; ledIndex >= 0; ledIndex--) {
+  for(ledIndex = 124; ledIndex >= -1; ledIndex--) {
+    // blackout after last push
+    if (ledIndex == -1) {
+      delay(_PUSH_TIME_COMPENSATION);
+      blackout();
+      break;
+    }
     // read pwm encoded intensity levels of each color
     ledData = _cube->getLed(ledIndex);
-    
     for (colorIndex = 0; colorIndex < 6; colorIndex += 2) {
       if (ledData & (1 << colorIndex)) {
         pushHigh();

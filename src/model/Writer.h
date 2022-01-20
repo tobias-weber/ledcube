@@ -40,5 +40,7 @@ class Writer {
         void blackout();
         // enable latch of shift register
         void triggerLatch();
+        // push time compensation
+        const byte _PUSH_TIME_COMPENSATION = 1;
 };
 #endif
