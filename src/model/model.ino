@@ -31,6 +31,5 @@ void setup() {
 
 void loop() {
   animation.renderNextFrame();
- 
   animation.showNextFrame();
 }

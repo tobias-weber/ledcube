@@ -7,7 +7,7 @@
 // include header for Animation
 #include "Animation.h"
 
-byte counter = 0;
+int counter = 0;
 
 // contructor
 Animation::Animation() {
@@ -25,21 +25,19 @@ void Animation::assignWriter(Writer* writer) {
 void Animation::renderNextFrame() {
     _cube->clearLeds();
     int ledIdx;
-    for (ledIdx = 0; ledIdx < 25; ledIdx++) {
-       _cube->setLed(ledIdx, 0b000001);
-    }
-    for (ledIdx = 25; ledIdx < 50; ledIdx++) {
-       _cube->setLed(ledIdx, 0b000100);
-    }
-    for (ledIdx = 50; ledIdx < 75; ledIdx++) {
-       _cube->setLed(ledIdx, 0b010000);
-    }
-    for (ledIdx = 75; ledIdx < 100; ledIdx++) {
-       _cube->setLed(ledIdx, 0b000101);
-    }
-    for (ledIdx = 100; ledIdx < 125; ledIdx++) {
-       _cube->setLed(ledIdx, 0b010000);
-    }
+    _cube->setLed(124, 0b010101);
+    //_cube->setLed(0, 0b000101);
+    /*
+    _cube->setLed((counter/10 + 1) % 125, 0b010101);
+    _cube->setLed(counter/10 % 125, 0b000001);
+    _cube->setLed((counter/10-1) % 125, 0b000001);
+    _cube->setLed((counter/10-2) % 125, 0b000101);
+    _cube->setLed((counter/10-3) % 125, 0b000100);
+    _cube->setLed((counter/10-4) % 125, 0b010100);
+    _cube->setLed((counter/10-5) % 125, 0b010000);
+    _cube->setLed((counter/10-6) % 125, 0b010001);*/
+
+    counter++;
 }
 // writes the next frame to the hardware
 void Animation::showNextFrame() {
