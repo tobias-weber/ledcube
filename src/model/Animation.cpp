@@ -7,11 +7,28 @@
 // include header for Animation
 #include "Animation.h"
 
-int counter = 0;
-
 // contructor
 Animation::Animation() {
 }
+
+//.............................................
+//BEGIN: VARIABLES USED BY THIS ANIMATION...
+//.............................................
+
+float x_pos = 0;
+float y_pos = 1;
+float z_pos = 2;
+
+float x_change = 1;
+float y_change = 1;
+float z_change = 1;
+
+byte color = 0;
+byte colors[] = {0b000001, 0b000100, 0b000101, 0b010000, 0b010001, 0b010100, 0b010101};
+
+//...........................................
+//END: VARIABLES USED BY THIS ANIMATION...
+//...........................................
 
 // assigns a cube to this animation
 void Animation::assignCube(Cube* cube){
@@ -32,20 +49,28 @@ void Animation::renderNextFrame() {
     //FRAME CALCULATION STARTS HERE...
     //...................................
     
-    _cube->clearLeds();
-    if (counter > 1270) {
-      counter = 0;
+    // turn of previous led
+    _cube->setLed(round(x_pos), round(x_pos), round(x_pos), 0b0);
+    // update position
+    x_pos += x_change;
+    y_pos += y_change;
+    z_pos += z_change;
+    // turn on new led
+    _cube->setLed(round(x_pos), round(x_pos), round(x_pos), colors[color]);
+    //update direction
+    if (x_pos < 1 or x_pos > 4) {
+      x_change = -x_change + randomDeviation();
+      color = (color++ % 7);
     }
-    _cube->setLed((counter/10 + 1) % 125, 0b010101);
-    _cube->setLed(counter/10 % 125, 0b000001);
-    _cube->setLed((counter/10-1) % 125, 0b000001);
-    _cube->setLed((counter/10-2) % 125, 0b000101);
-    _cube->setLed((counter/10-3) % 125, 0b000100);
-    _cube->setLed((counter/10-4) % 125, 0b010100);
-    _cube->setLed((counter/10-5) % 125, 0b010000);
-    _cube->setLed((counter/10-6) % 125, 0b010001);
-    counter++;
-
+    if (y_pos < 1 or y_pos > 4){
+      y_change = -y_change + randomDeviation();
+      color = (color++ % 7);
+    }
+    if (z_pos < 1 or z_pos > 4){
+      z_change = -z_change + randomDeviation();
+      color = (color++ % 7);
+    }
+    
     //...................................
     //FRAME CALCULATION ENDS HERE...
     //...................................
@@ -57,6 +82,11 @@ void Animation::showNextFrame() {
       return;
   }
   _writer->writeCube();
+}
+
+// creates a random number from -0.4 to 0.4
+float Animation::randomDeviation() {
+  return (random(9) - 4) / 10.0;
 }
 
 // checks if the current frame is to early
