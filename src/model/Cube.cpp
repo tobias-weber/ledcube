@@ -46,13 +46,9 @@ byte Cube::getColor(byte r, byte g, byte b) {
   return r + g << 2 + b << 4;
 }
 
-// ====================================================================================
-//                              More advanced set methods
-// ====================================================================================
-
-
-
-
+// ............................
+// More advanced set methods
+// ............................
 
 // Set all leds in the k-th normal plane of axis to color.
 // Axis can be 0 -> x     1 -> y     2 -> z (= set color of a layer)
@@ -66,8 +62,8 @@ void Cube::setPlane(byte axis, byte k, byte color) {
       break;
 
     case 1: // y-Axis
-      for (byte z = 0; z < 5; z++)
-        for (byte x = 0; i < 5; i++) {
+      for (byte z = 0; z < 5; z++) {
+        for (byte x = 0; x < 5; x++) {
           _cubearray[25 * z + 5 * k + x] = color;
         }
       }
@@ -79,27 +75,31 @@ void Cube::setPlane(byte axis, byte k, byte color) {
       }
       break;
   }
-
+}
 // Set all leds in the k-th normal plane of axis to values in colors.
 void Cube::setPlane(byte axis, byte k, byte colors[25]) {
-
+  byte i;
   switch(axis) {
     case 0: // x-Axis
-      for (byte i = 0; i < 25; i++) {
+      // i declared at top
+      for (i = 0; i < 25; i++) {
         _cubearray[5 * i + k] = colors[i];
       }
       break;
 
     case 1: // y-Axis
-      for (byte z = 0; z < 5; z++)
-        for (byte x = 0; i < 5; i++) {
+      byte z;
+      for (z = 0; z < 5; z++){
+      byte x;
+        for (x = 0; x < 5; x++) {
           _cubearray[25 * z + 5 * k + x] = colors[5 * z + x];
         }
       }
       break;
 
     case 2: // z-Axis
-      for (byte i = 0; i < 25; i++) {
+      // i declared at top
+      for (i = 0; i < 25; i++) {
         _cubearray[25 * k + i] = colors[i];
       }
       break;
@@ -115,10 +115,11 @@ void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
   if (blendMode == 0) {
     setPlane(axis, k, colors);
   } else {
-
     switch(axis) {
+      byte i;
       case 0: // x-Axis
-        for (byte i = 0; i < 25; i++) {
+        // i declared at top
+        for (i = 0; i < 25; i++) {
           byte cubeIdx = 5 * i + k;
 
           if (blendMode == 1 && colors[i]) {
@@ -133,8 +134,10 @@ void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
         break;
 
       case 1: // y-Axis
-        for (byte z = 0; z < 5; z++)
-          for (byte x = 0; i < 5; i++) {
+      byte z;
+        for (z = 0; z < 5; z++){
+        byte x;
+          for (x = 0; x < 5; x++) {
             byte cubeIdx = 25 * z + 5 * k + x;
             byte colorIdx = 5 * z + x;
             
@@ -150,7 +153,8 @@ void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
         break;
 
       case 2: // z-Axis
-        for (byte i = 0; i < 25; i++) {
+        // i declared at top
+        for (i = 0; i < 25; i++) {
           byte cubeIdx = 25 * k + i;
 
           if (blendMode == 1 && colors[i]) {
@@ -164,6 +168,4 @@ void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
         break;
   }
 }
-
-
 }
