@@ -21,6 +21,10 @@ class Cube {
         // returns the byte of the led by unique led id (0-124)
         byte getLed(byte id);
         // color is returned in the format: 0b2b1g2g1r2r1
-        byte getColor(byte r, byte g, byte b);     
+        byte getColor(byte r, byte g, byte b);
+
+        void setPlane(byte axis, byte k, byte color);
+        void setPlane(byte axis, byte k, byte colors[25]);
+        void setPlane(byte axis, byte k, byte colors[25], byte blendMode);     
 };
 #endif
