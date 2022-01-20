@@ -24,11 +24,14 @@ void Animation::assignWriter(Writer* writer) {
 // calculates the next frame and updates the cube object
 void Animation::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
-    if (millis() - _lastFrame < _frameDelta) {
+    if (frameIsToEarly()) {
       return;
     }
-    _lastFrame = millis();
-    // animation...
+   
+    //...................................
+    //FRAME CALCULATION STARTS HERE...
+    //...................................
+    
     _cube->clearLeds();
     if (counter > 1270) {
       counter = 0;
@@ -42,13 +45,34 @@ void Animation::renderNextFrame() {
     _cube->setLed((counter/10-5) % 125, 0b010000);
     _cube->setLed((counter/10-6) % 125, 0b010001);
     counter++;
+
+    //...................................
+    //FRAME CALCULATION ENDS HERE...
+    //...................................
 }
 // writes the next frame to the hardware
 void Animation::showNextFrame() {
   // check if rewriting of current frame is already necessary. Minimizes jitter
-  if (millis() - _lastRefresh < _refreshDelta) {
+  if (refreshIsToEarly()) {
       return;
   }
-  _lastRefresh = millis();
   _writer->writeCube();
+}
+
+// checks if the current frame is to early
+bool Animation::frameIsToEarly() {
+  if (millis() - _lastFrame < _frameDelta) {
+    return true;
+  }
+   _lastFrame = millis();
+   return false;
+}
+
+// checks if the current refresh is to early
+bool Animation::refreshIsToEarly() {
+  if (millis() - _lastRefresh < _refreshDelta) {
+    return true;
+  }
+  _lastRefresh = millis();
+  return false;
 }

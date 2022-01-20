@@ -31,9 +31,13 @@ class Animation {
         long _lastFrame;
         // time since last write
         long _lastRefresh;
-        // refresh rate of cube
+        // refresh rate of cube >>> D O N ' T  T O U C H! <<<
         const float _refreshDelta = 1000 / 60;
         // framerate of the animation
         const float _frameDelta = 1000 / 60;
+        // checks if frame is to early
+        bool frameIsToEarly();
+        // checks if frame is to early
+        bool refreshIsToEarly();
         };
 #endif
