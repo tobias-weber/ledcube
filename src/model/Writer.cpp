@@ -28,6 +28,7 @@ void Writer::writeCube() {
   for(ledIndex = 124; ledIndex >= 0; ledIndex--) {
     // read pwm encoded intensity levels of each color
     ledData = _cube->getLed(ledIndex);
+    setLayer(ledIndex / 25);
     for (colorIndex = 0; colorIndex < 6; colorIndex += 2) {
       if (ledData & (1 << colorIndex)) {
         pushHigh();
@@ -35,20 +36,22 @@ void Writer::writeCube() {
         pushLow();
       }
     }
+    if (ledIndex % 25 == 0) {
+      triggerLatch();
+    }
   }
-  triggerLatch();
 }
 
 // activates the selected layer
 // int used to prevent cast from modulo operator
 void Writer::setLayer(int layer) {
   int pinIncrement;
-  for (pinIncrement = 0; pinIncrement < 4; pinIncrement++) {
+  for (pinIncrement = 0; pinIncrement < 5; pinIncrement++) {
     if (layer == pinIncrement) {
       digitalWrite(_mosfetLayer0 + pinIncrement, LOW);
-      continue;
+    } else {
+      digitalWrite(_mosfetLayer0 + pinIncrement, HIGH);
     }
-    digitalWrite(_mosfetLayer0 + pinIncrement, HIGH);
   }
 }
 

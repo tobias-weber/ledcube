@@ -31,6 +31,6 @@ void setup() {
 
 void loop() {
   animation.renderNextFrame();
-  delay(1000);
+ 
   animation.showNextFrame();
 }
