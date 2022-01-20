@@ -17,9 +17,20 @@ void setup() {
   animation.assignCube(&cube);
   writer.assignCube(&cube);
   animation.assignWriter(&writer);
+
+  pinMode(SERIAL_DATA, OUTPUT);
+  pinMode(SERIAL_SHIFT, OUTPUT);
+  pinMode(SERIAL_LATCH, OUTPUT);
+
+  pinMode(MOS_LAYER_0, OUTPUT);
+  pinMode(MOS_LAYER_0 + 1, OUTPUT);
+  pinMode(MOS_LAYER_0 + 2, OUTPUT);
+  pinMode(MOS_LAYER_0 + 3, OUTPUT);
+  pinMode(MOS_LAYER_0 + 4, OUTPUT);
 }
 
 void loop() {
   animation.renderNextFrame();
+  delay(1000);
   animation.showNextFrame();
 }

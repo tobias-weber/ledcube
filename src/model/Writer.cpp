@@ -36,7 +36,7 @@ void Writer::writeCube() {
       }
     }
   }
-  
+  triggerLatch();
 }
 
 // activates the selected layer
@@ -45,10 +45,10 @@ void Writer::setLayer(int layer) {
   int pinIncrement;
   for (pinIncrement = 0; pinIncrement < 4; pinIncrement++) {
     if (layer == pinIncrement) {
-      digitalWrite(_mosfetLayer0 + pinIncrement, HIGH);
+      digitalWrite(_mosfetLayer0 + pinIncrement, LOW);
       continue;
     }
-    digitalWrite(_mosfetLayer0 + pinIncrement, LOW);
+    digitalWrite(_mosfetLayer0 + pinIncrement, HIGH);
   }
 }
 
@@ -60,14 +60,14 @@ void Writer::triggerLatch() {
 
 // pushes a single high bit to the hardware cube
 void Writer::pushHigh() {
-  digitalWrite(_serialData, HIGH);
+  digitalWrite(_serialData, LOW);
   digitalWrite(_serialShift, LOW);
   digitalWrite(_serialShift, HIGH);
 }
 
 // pushes a single low bit to the hardware cube
 void Writer::pushLow() {
-  digitalWrite(_serialData, LOW);
+  digitalWrite(_serialData, HIGH);
   digitalWrite(_serialShift, LOW);
   digitalWrite(_serialShift, HIGH);
 }
