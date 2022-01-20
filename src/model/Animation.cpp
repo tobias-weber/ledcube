@@ -24,10 +24,6 @@ void Animation::assignWriter(Writer* writer) {
 // calculates the next frame and updates the cube object
 void Animation::renderNextFrame() {
     _cube->clearLeds();
-    int ledIdx;
-    _cube->setLed(124, 0b010101);
-    //_cube->setLed(0, 0b000101);
-    /*
     _cube->setLed((counter/10 + 1) % 125, 0b010101);
     _cube->setLed(counter/10 % 125, 0b000001);
     _cube->setLed((counter/10-1) % 125, 0b000001);
@@ -35,8 +31,7 @@ void Animation::renderNextFrame() {
     _cube->setLed((counter/10-3) % 125, 0b000100);
     _cube->setLed((counter/10-4) % 125, 0b010100);
     _cube->setLed((counter/10-5) % 125, 0b010000);
-    _cube->setLed((counter/10-6) % 125, 0b010001);*/
-
+    _cube->setLed((counter/10-6) % 125, 0b010001);
     counter++;
 }
 // writes the next frame to the hardware

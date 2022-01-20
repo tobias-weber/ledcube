@@ -28,7 +28,7 @@ void Writer::writeCube() {
   for(ledIndex = 124; ledIndex >= 0; ledIndex--) {
     // read pwm encoded intensity levels of each color
     ledData = _cube->getLed(ledIndex);
-    setLayer(ledIndex / 25);
+    
     for (colorIndex = 0; colorIndex < 6; colorIndex += 2) {
       if (ledData & (1 << colorIndex)) {
         pushHigh();
@@ -37,22 +37,26 @@ void Writer::writeCube() {
       }
     }
     if (ledIndex % 25 == 0) {
+      blackout();
       triggerLatch();
-    }
+      setLayer(ledIndex / 25);
+    }  
   }
 }
 
 // activates the selected layer
 // int used to prevent cast from modulo operator
 void Writer::setLayer(int layer) {
-  int pinIncrement;
-  for (pinIncrement = 0; pinIncrement < 5; pinIncrement++) {
-    if (layer == pinIncrement) {
-      digitalWrite(_mosfetLayer0 + pinIncrement, LOW);
-    } else {
-      digitalWrite(_mosfetLayer0 + pinIncrement, HIGH);
-    }
-  }
+  digitalWrite(_mosfetLayer0 + layer, LOW);
+}
+
+// blacks the whole cube
+void Writer::blackout() {
+  digitalWrite(_mosfetLayer0, HIGH);
+  digitalWrite(_mosfetLayer0 + 1, HIGH);
+  digitalWrite(_mosfetLayer0 + 2, HIGH);
+  digitalWrite(_mosfetLayer0 + 3, HIGH);
+  digitalWrite(_mosfetLayer0 + 4, HIGH);
 }
 
 // triggers the latch ofa the shift register

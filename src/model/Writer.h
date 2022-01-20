@@ -36,6 +36,8 @@ class Writer {
         void pushLow();
         // activates the specified layer
         void setLayer(int layer);
+        // blacks the whole cube
+        void blackout();
         // enable latch of shift register
         void triggerLatch();
 };
