@@ -2,7 +2,7 @@
 #define CharacterLUT_h
 
 namespace CharacterLUT {
-    static const PROGMEM unsigned long _char_table[6] = {
+    static const PROGMEM unsigned long _char_table[69] = {
         0b1111100101001010010111111,
         0b0111010101101011010111111,
         0b1000110001100011000111111,
@@ -73,5 +73,5 @@ namespace CharacterLUT {
         0b0000000000000000000000000,
         0b1111111111111111111111111
     };
-
+}
 #endif

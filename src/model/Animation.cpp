@@ -40,8 +40,7 @@ void Animation::renderNextFrame() {
     //BEGIN: Frame calculations...
     //...................................
     
-    // turn of previous led
-    
+    // turn off previous led
     _cube->setLed(lowByte(x_pos), lowByte(y_pos), lowByte(z_pos), 0b0);
     // update position
     x_pos = limit(x_pos + x_change);
