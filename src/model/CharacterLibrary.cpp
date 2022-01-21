@@ -15,3 +15,18 @@ CharacterLibrary::CharacterLibrary() {
 long CharacterLibrary::getCharacter(byte charIndex) {
     return pgm_read_dword(&CharacterLUT::_char_table[charIndex]);
 }
+
+byte* CharacterLibrary::getColoredCharacter(byte charIndex, byte color) {
+  long pattern = getCharacter(charIndex);
+  byte* plane = (byte*) malloc(25*sizeof(byte));
+  byte idx;
+  for (idx = 24; idx > 0; idx--) {
+    if (pattern & 0b1) {
+      plane[idx] = color;
+    } else {
+      plane[idx] = 0;
+    }
+    pattern = pattern>>1;
+  }
+  return plane;
+}

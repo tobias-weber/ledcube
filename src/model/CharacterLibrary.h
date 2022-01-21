@@ -5,5 +5,6 @@ class CharacterLibrary {
     public:
         CharacterLibrary();
         long getCharacter(byte charIndex);
+        byte* getColoredCharacter(byte charIndex, byte color);
 };
 #endif

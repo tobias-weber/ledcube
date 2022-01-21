@@ -28,7 +28,7 @@ void ScreenSaver::renderNextFrame() {
     //...................................
     //BEGIN: Frame calculations...
     //...................................
-    
+    /*
     // turn off previous led
     _cube->setLed(lowByte(x_pos), lowByte(y_pos), lowByte(z_pos), 0b0);
     // update position
@@ -59,13 +59,14 @@ void ScreenSaver::renderNextFrame() {
       if (color > 6) {
         color = 0;
       }
-    }
-    _cube->setPlane(0,2,0b000001);
-    _cube->setPlane(1,2,0b010000,3);
-    _cube->setPlane(2,2,0b000100,3);
+    }*/
+    byte *plane = _charLib->getColoredCharacter(1, 0b010001);
+    byte simplePlane[25] = {0b1,0,0,0,0b1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    _cube->setPlane(2,2,simplePlane);
     //...................................
     //END: Frame calculations...
     //...................................
+    free(plane);
 }
 
 //.............................................
