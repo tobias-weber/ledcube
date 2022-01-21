@@ -224,7 +224,7 @@ void Cube::setPlane(byte axis, byte k, byte color, byte blendMode) {
 }
 
 void Cube::setBlock(byte size, byte color, bool drawEdges, bool drawFaces, bool drawFill) {
-  switch (sideLength)
+  switch (size)
   {
   case 1:
     if (drawEdges) _cubearray[62] = color;
