@@ -1,4 +1,4 @@
-#include "ExampleAnimation.h"
+#include "TextExampleAnimation.h"
 #include "Cube.h"
 #include "Writer.h"
 #include "CharacterLibrary.h"
@@ -14,13 +14,13 @@ const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
 Writer writer(SERIAL_DATA, SERIAL_SHIFT, SERIAL_LATCH, MOS_LAYER_0);
 // animation to display
-ExampleAnimation exampleAnimation;
+TextExampleAnimation animation;
 
 void setup() {
-  exampleAnimation.assignCube(&cube);
-  exampleAnimation.assignCharacterLibrary(&characterLibrary);
+  animation.assignCube(&cube);
+  animation.assignCharacterLibrary(&characterLibrary);
   writer.assignCube(&cube);
-  exampleAnimation.assignWriter(&writer);
+  animation.assignWriter(&writer);
 
   pinMode(SERIAL_DATA, OUTPUT);
   pinMode(SERIAL_SHIFT, OUTPUT);
@@ -34,6 +34,6 @@ void setup() {
 }
 
 void loop() {
-  exampleAnimation.renderNextFrame();
-  exampleAnimation.showNextFrame();
+  animation.renderNextFrame();
+  animation.showNextFrame();
 }

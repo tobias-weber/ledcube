@@ -28,5 +28,6 @@ class Cube {
         void setPlane(byte axis, byte k, byte colors[25], byte blendMode); 
         void setPlane(byte axis, byte k, byte color, byte blendMode);    
         void setBlock(byte size, byte color, bool drawEdges, bool drawFaces, bool drawFill);
+        void setSphere(byte size, byte color, bool drawSurface, bool drawFill);
 };
 #endif

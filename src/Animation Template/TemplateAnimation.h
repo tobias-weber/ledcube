@@ -1,10 +1,10 @@
 // protects user from including library twice
-#ifndef ExampleAnimation_h
-#define ExampleAnimation_h
+#ifndef TemplateAnimation_h
+#define TemplateAnimation_h
 
 #include "Animation.h"
 
-class ExampleAnimation:public Animation {
+class TemplateAnimation:public Animation {
     public:
         void renderNextFrame();
         // Declare your own methods here
