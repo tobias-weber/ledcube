@@ -1,3 +1,9 @@
+//include arduino default data types and functions
+#include "Arduino.h"
+
+//include class header
+#include "ScreenSaver.h"
+
 //.............................................
 //BEGIN: Variables used by this animation...
 //.............................................

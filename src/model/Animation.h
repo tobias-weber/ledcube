@@ -27,7 +27,6 @@ class Animation {
         void assignWriter(Writer* writer);
         // assigns a character library to the animation
         void assignCharacterLibrary(CharacterLibrary* characterLibrary);
-    private:
         // pointer to the writer responsible for writing the cube
         Writer *_writer;
         // pointer to the cube used to store the next frame

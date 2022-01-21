@@ -7,5 +7,7 @@
 class ScreenSaver:public Animation {
     public:
         void renderNextFrame();
+        int newDirection(int oldDirection);
+        int limit(int coord);
 };
 #endif
