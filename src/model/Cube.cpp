@@ -166,6 +166,59 @@ void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
           }
         }
         break;
+    }
   }
 }
+
+void Cube::setPlane(byte axis, byte k, byte color, byte blendMode) {
+  if (blendMode == 0 || (blendMode == 1 && color != 0)) {
+    setPlane(axis, k, color);
+  } else if (blendMode == 1) {
+    return;
+  } else {
+    switch(axis) {
+      byte i;
+      case 0: // x-Axis
+        // i declared at top
+        for (i = 0; i < 25; i++) {
+          byte cubeIdx = 5 * i + k;
+          if (blendMode == 2) {
+            _cubearray[cubeIdx] = _cubearray[cubeIdx] & color;
+          } else if (blendMode == 3) {
+            _cubearray[cubeIdx] = _cubearray[cubeIdx] | color;
+          }
+          
+        }
+        break;
+
+      case 1: // y-Axis
+      byte z;
+        for (z = 0; z < 5; z++){
+        byte x;
+          for (x = 0; x < 5; x++) {
+            byte cubeIdx = 25 * z + 5 * k + x;
+            
+            if (blendMode == 2) {
+              _cubearray[cubeIdx] = _cubearray[cubeIdx] & color;
+            } else if (blendMode == 3) {
+              _cubearray[cubeIdx] = _cubearray[cubeIdx] | color;
+            }
+          }
+        }
+        break;
+
+      case 2: // z-Axis
+        // i declared at top
+        for (i = 0; i < 25; i++) {
+          byte cubeIdx = 25 * k + i;
+
+          if (blendMode == 2) {
+            _cubearray[cubeIdx] = _cubearray[cubeIdx] & color;
+          } else if (blendMode == 3) {
+            _cubearray[cubeIdx] = _cubearray[cubeIdx] | color;
+          }
+        }
+        break;
+    }
+  }
 }

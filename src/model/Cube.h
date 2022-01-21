@@ -25,6 +25,7 @@ class Cube {
 
         void setPlane(byte axis, byte k, byte color);
         void setPlane(byte axis, byte k, byte colors[25]);
-        void setPlane(byte axis, byte k, byte colors[25], byte blendMode);     
+        void setPlane(byte axis, byte k, byte colors[25], byte blendMode); 
+        void setPlane(byte axis, byte k, byte color, byte blendMode);    
 };
 #endif

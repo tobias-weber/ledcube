@@ -51,19 +51,27 @@ void Animation::renderNextFrame() {
     if (x_pos < 1 or x_pos > 3) {
       x_change = newDirection(x_change);
       color++;
-      color = (color % 7);
+      if (color > 6) {
+        color = 0;
+      }
     }
     if (y_pos < 1 or y_pos > 3){
       y_change = newDirection(y_change);
       color++;
-      color = (color % 7);
+      if (color > 6) {
+        color = 0;
+      }
     }
     if (z_pos < 1 or z_pos > 3){
       z_change = newDirection(z_change);
       color++;
-      color = (color % 7);
+      if (color > 6) {
+        color = 0;
+      }
     }
-    
+    _cube->setPlane(0,2,0b000001);
+    _cube->setPlane(1,2,0b010000,3);
+    _cube->setPlane(2,2,0b010000,3);
     //...................................
     //END: Frame calculations...
     //...................................
