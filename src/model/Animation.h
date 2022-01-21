@@ -18,7 +18,7 @@ class Animation {
     public:
         Animation();
         // calculates the next frame and updates the cube object
-        void renderNextFrame();
+        virtual void renderNextFrame() = 0;
         // writes the next frame to the hardware
         void showNextFrame();
         // assigns a cube to this animation
