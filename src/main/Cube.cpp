@@ -254,12 +254,12 @@ void Cube::setBlock(byte size, byte color, bool drawEdges, bool drawFaces, bool 
       _cubearray[93] = color;
     }
     if (drawFaces) {
-    _cubearray[37] = color;
-    _cubearray[57] = color;
-    _cubearray[61] = color;
-    _cubearray[63] = color;
-    _cubearray[67] = color;
-    _cubearray[87] = color;
+      _cubearray[37] = color;
+      _cubearray[57] = color;
+      _cubearray[61] = color;
+      _cubearray[63] = color;
+      _cubearray[67] = color;
+      _cubearray[87] = color;
     }
     if (drawFill) {
       _cubearray[62] = color;
@@ -379,7 +379,7 @@ void Cube::setBlock(byte size, byte color, bool drawEdges, bool drawFaces, bool 
       _cubearray[118] = color;
     }
 
-    if (drawFill) setBlock(3, color, true, true, true);
+    if (drawFill) setBlock(2, color, true, true, true);
   
   }
 }

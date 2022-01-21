@@ -2,7 +2,7 @@
 Arduino Code for controlling a 5 x 5 x 5 RGB LED Cube with 74hc595 ICs
 
 ## How to write and execute your own Animations
-1. Copy `TemplateAnimation.cpp` and `TemplateAnimation.h` into the model folder.
+1. Copy `TemplateAnimation.cpp` and `TemplateAnimation.h` into the `main` folder.
 2. Rename the two files to the name your animation should have.
 3. By using search and replace, replace all occurences of `TemplateAnimation` with the name of your animation.
 4. Write your own animation code. If you declare new methods, write their signatures into the header file.
