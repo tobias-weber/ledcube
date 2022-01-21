@@ -383,3 +383,40 @@ void Cube::setBlock(byte size, byte color, bool drawEdges, bool drawFaces, bool 
   
   }
 }
+
+void Cube::setSphere(byte size, byte color, bool drawSurface, bool drawFill) {
+    switch (size)
+    {
+    case 1:
+      if (drawSurface) _cubearray[62] = color;
+      break;
+
+    case 2:
+      if (drawSurface) {
+        _cubearray[37] = color;
+        _cubearray[57] = color;
+        _cubearray[61] = color;
+        _cubearray[63] = color;
+        _cubearray[67] = color;
+      }
+
+      if (drawFill) _cubearray[62] = color;
+
+    case 3:
+      if (drawSurface) {
+
+        /*
+        _cubearray[] = color;
+        _cubearray[] = color;
+        _cubearray[] = color;
+        _cubearray[] = color;*/
+
+      }
+      if (drawFill) {
+        setSphere(2, color, true, true);
+      }
+    
+    default:
+      break;
+    }
+  }
