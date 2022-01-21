@@ -20,11 +20,11 @@ byte* CharacterLibrary::getColoredCharacter(byte charIndex, byte color) {
   long pattern = getCharacter(charIndex);
   byte* plane = (byte*) malloc(25*sizeof(byte));
   byte idx;
-  for (idx = 24; idx > 0; idx--) {
+  for (idx = 25; idx > 0; idx--) {
     if (pattern & 0b1) {
-      plane[idx] = color;
+      plane[idx-1] = color;
     } else {
-      plane[idx] = 0;
+      plane[idx-1] = 0;
     }
     pattern = pattern>>1;
   }

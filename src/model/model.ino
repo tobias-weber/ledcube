@@ -1,4 +1,4 @@
-#include "ScreenSaver.h"
+#include "ExampleAnimation.h"
 #include "Cube.h"
 #include "Writer.h"
 #include "CharacterLibrary.h"
@@ -14,13 +14,13 @@ const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
 Writer writer(SERIAL_DATA, SERIAL_SHIFT, SERIAL_LATCH, MOS_LAYER_0);
 // animation to display
-ScreenSaver screenSaver;
+ExampleAnimation exampleAnimation;
 
 void setup() {
-  screenSaver.assignCube(&cube);
-  screenSaver.assignCharacterLibrary(&characterLibrary);
+  exampleAnimation.assignCube(&cube);
+  exampleAnimation.assignCharacterLibrary(&characterLibrary);
   writer.assignCube(&cube);
-  screenSaver.assignWriter(&writer);
+  exampleAnimation.assignWriter(&writer);
 
   pinMode(SERIAL_DATA, OUTPUT);
   pinMode(SERIAL_SHIFT, OUTPUT);
@@ -34,6 +34,6 @@ void setup() {
 }
 
 void loop() {
-  screenSaver.renderNextFrame();
-  screenSaver.showNextFrame();
+  exampleAnimation.renderNextFrame();
+  exampleAnimation.showNextFrame();
 }
