@@ -383,8 +383,6 @@ void Cube::setBlock(byte size, byte color, bool drawEdges, bool drawFaces, bool 
   
   }
 }
-<<<<<<< HEAD
-=======
 
 void Cube::setSphere(byte size, byte color, bool drawSurface, bool drawFill) {
     switch (size)
@@ -422,4 +420,3 @@ void Cube::setSphere(byte size, byte color, bool drawSurface, bool drawFill) {
       break;
     }
   }
->>>>>>> 445e40860ec1d1df221ac2b2eda3742e81ded0a6
