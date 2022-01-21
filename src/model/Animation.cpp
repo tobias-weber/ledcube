@@ -10,19 +10,6 @@
 // include character lut
 #include "CharacterLUT.h"
 
-
-
-
-//...........................................
-//END: Variables used by this animation...
-//...........................................
-
-// calculates the next frame and updates the cube object
-
-//.............................................
-//END: Helper methods for animation...
-//.............................................
-
 // contructor
 Animation::Animation() {
 }
