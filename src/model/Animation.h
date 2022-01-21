@@ -18,7 +18,7 @@ class Animation {
     public:
         Animation();
         // calculates the next frame and updates the cube object
-        void renderNextFrame();
+        virtual void renderNextFrame() = 0;
         // writes the next frame to the hardware
         void showNextFrame();
         // assigns a cube to this animation
@@ -46,9 +46,5 @@ class Animation {
         bool frameIsToEarly();
         // checks if frame is to early
         bool refreshIsToEarly();
-        // calculates the new direciton for the bounce
-        int newDirection(int oldDirection);
-        // maps positions outside of the cube to the nearest pixel
-        int limit(int coord);
 };
 #endif
