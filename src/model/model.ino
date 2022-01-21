@@ -1,7 +1,10 @@
 #include "Animation.h"
 #include "Cube.h"
 #include "Writer.h"
+#include "CharacterLibrary.h"
 
+// init character library
+CharacterLibrary characterLibrary;
 // cube object representing the Cube
 Cube cube;
 // writer used to write cube to hardware
@@ -15,6 +18,7 @@ Animation animation;
 
 void setup() {
   animation.assignCube(&cube);
+  animation.assignCharacterLibrary(&characterLibrary);
   writer.assignCube(&cube);
   animation.assignWriter(&writer);
 

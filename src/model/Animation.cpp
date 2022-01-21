@@ -7,6 +7,9 @@
 // include header for Animation
 #include "Animation.h"
 
+// include character lut
+#include "CharacterLUT.h"
+
 //.............................................
 //BEGIN: Variables used by this animation...
 //.............................................
@@ -71,7 +74,7 @@ void Animation::renderNextFrame() {
     }
     _cube->setPlane(0,2,0b000001);
     _cube->setPlane(1,2,0b010000,3);
-    _cube->setPlane(2,2,0b010000,3);
+    _cube->setPlane(2,2,0b000100,3);
     //...................................
     //END: Frame calculations...
     //...................................
@@ -112,9 +115,14 @@ Animation::Animation() {
 void Animation::assignCube(Cube* cube){
   _cube = cube;
 }
+
 // assigns a writer to this animation
 void Animation::assignWriter(Writer* writer) {
   _writer = writer;
+}
+
+void Animation::assignCharacterLibrary(CharacterLibrary* characterLibrary) {
+  _charLib = characterLibrary;
 }
 
 // writes the next frame to the hardware

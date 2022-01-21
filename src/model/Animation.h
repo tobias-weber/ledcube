@@ -11,6 +11,9 @@
 //include header for Writer
 #include "Writer.h"
 
+//include header for char lib
+#include "CharacterLibrary.h"
+
 class Animation {
     public:
         Animation();
@@ -22,11 +25,15 @@ class Animation {
         void assignCube(Cube* cube);
         // assigns a writer to this animation
         void assignWriter(Writer* writer);
+        // assigns a character library to the animation
+        void assignCharacterLibrary(CharacterLibrary* characterLibrary);
     private:
         // pointer to the writer responsible for writing the cube
         Writer *_writer;
         // pointer to the cube used to store the next frame
         Cube *_cube;
+        //pointer to the character library
+        CharacterLibrary *_charLib;
         // time since last render
         long _lastFrame;
         // time since last write
