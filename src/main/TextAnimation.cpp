@@ -19,15 +19,17 @@ void TextExampleAnimation::renderNextFrame() {
     if (frameIsToEarly()) {
       return;
     }
+    _cube->clearLeds() // Can be removed if the whole cube doesn't need to be reset every frame
+
     if (color > 5) {
-      direction = 0;
+      color = 0;
     }
     if (layer > 4) {
-      direction = 0;
+      layer = 0;
       letter++;
     }
     if (letter > 16) {
-      leter = 0;
+      letter = 0;
       axis++;
     }
     if (axis > 2) {
