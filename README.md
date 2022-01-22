@@ -9,6 +9,10 @@ Arduino Code for controlling a 5 x 5 x 5 RGB LED Cube with 74hc595 ICs
 5. Go to `main.ino`, add a statement to include your animation header file.
 6. Change the type of the animation object to your animation.
 
+Good to know:
+- Framerate can be changed in Animation.h
+- Variables defined outside of a method are global and thus MUST HAVE A UNIQUE NAME!
+
 ## How to add new methods to change the led colors to the cube
 1. Write your method in `Cube.cpp`.
 2. Add your method signature to `Cube.h`.
