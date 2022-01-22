@@ -13,5 +13,5 @@ void TemplateAnimation::renderNextFrame() {
     if (frameIsToEarly()) {
       return;
     }
-    _cube->clearLeds() // Can be removed if the whole cube doesn't need to be reset every frame
+    _cube->clearLeds(); // Can be removed if the whole cube doesn't need to be reset every frame
 }
