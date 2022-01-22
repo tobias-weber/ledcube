@@ -25,13 +25,13 @@ void PlaneAnimation::renderNextFrame() {
     }
 
     // axis 0 solo
-    if (state = 0) {
+    if (state == 0) {
       _cube->setPlane(0, layer, 0b010000);
-    } else if (state = 1) {
+    } else if (state == 1) {
       _cube->setPlane(1, layer, 0b000100);
-    } else if (state = 2) {
+    } else if (state == 2) {
       _cube->setPlane(2, layer, 0b000001);
-    } else if (state = 3) {
+    } else if (state == 3) {
       _cube->setPlane(0, layer, 0b010000);
       _cube->setPlane(1, layer, 0b000100, 3);
       _cube->setPlane(2, layer, 0b000001, 3);

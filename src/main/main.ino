@@ -1,4 +1,4 @@
-#include "CheckeredPatternAnimation.h"
+#include "PlaneAnimation.h"
 #include "Cube.h"
 #include "Writer.h"
 #include "CharacterLibrary.h"
@@ -14,7 +14,7 @@ const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
 Writer writer(SERIAL_DATA, SERIAL_SHIFT, SERIAL_LATCH, MOS_LAYER_0);
 // animation to display
-CheckeredPatternAnimation animation;           // <------------- CHOOSE ANIMATION HERE --------------
+PlaneAnimation animation;           // <------------- CHOOSE ANIMATION HERE --------------
 
 void setup() {
   animation.assignCube(&cube);

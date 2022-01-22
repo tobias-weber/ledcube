@@ -27,6 +27,7 @@ void TextAnimation::renderNextFrame() {
     if (textLayer > 4) {
       textLayer = 0;
       letter++;
+      color++;
     }
     if (letter > 16) {
       letter = 0;
@@ -41,5 +42,5 @@ void TextAnimation::renderNextFrame() {
     _cube->setPlane(axis, textLayer, plane);
     free(plane);
     textLayer++;
-    color++;
+
 }
