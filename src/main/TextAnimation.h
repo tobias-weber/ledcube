@@ -4,7 +4,7 @@
 
 #include "Animation.h"
 
-class TextExampleAnimation:public Animation {
+class TextAnimation:public Animation {
     public:
         void renderNextFrame();
         // Declare your own methods here

@@ -16,8 +16,8 @@ int x_change = 1;
 int y_change = 1;
 int z_change = 1;
 
-byte color = 0;
-byte colors[] = {0b000001, 0b000100, 0b000101, 0b010000, 0b010001, 0b010100, 0b010101};
+byte screenSaverColor = 0;
+byte screenSaverColors[] = {0b000001, 0b000100, 0b000101, 0b010000, 0b010001, 0b010100, 0b010101};
 
 void ScreenSaver::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
@@ -37,27 +37,27 @@ void ScreenSaver::renderNextFrame() {
     z_pos = limit(z_pos + z_change);
     
     // turn on new led
-    _cube->setLed(lowByte(x_pos), lowByte(y_pos), lowByte(z_pos), colors[color]);
+    _cube->setLed(lowByte(x_pos), lowByte(y_pos), lowByte(z_pos), screenSaverColors[screenSaverColor]);
     //update direction
     if (x_pos < 1 or x_pos > 3) {
       x_change = newDirection(x_change);
-      color++;
-      if (color > 6) {
-        color = 0;
+      screenSaverColor++;
+      if (screenSaverColor > 6) {
+        screenSaverColor = 0;
       }
     }
     if (y_pos < 1 or y_pos > 3){
       y_change = newDirection(y_change);
-      color++;
-      if (color > 6) {
-        color = 0;
+      screenSaverColor++;
+      if (screenSaverColor > 6) {
+        screenSaverColor = 0;
       }
     }
     if (z_pos < 1 or z_pos > 3){
       z_change = newDirection(z_change);
-      color++;
-      if (color > 6) {
-        color = 0;
+      screenSaverColor++;
+      if (screenSaverColor > 6) {
+        screenSaverColor = 0;
       }
     }
     
