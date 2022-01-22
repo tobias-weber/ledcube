@@ -1,6 +1,6 @@
 // protects user from including library twice
-#ifndef TextExampleAnimation_h
-#define TextExampleAnimation_h
+#ifndef TextAnimation_h
+#define TextAnimation_h
 
 #include "Animation.h"
 
