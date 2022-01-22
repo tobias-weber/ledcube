@@ -40,7 +40,7 @@ class Animation {
         // refresh rate of cube >>> D O N ' T  T O U C H! <<<
         const float _refreshDelta = 0;
         // framerate of the animation
-        const float _frameDelta = 1000 / 3;    // <---- CHANGE FRAMERATE HERE ----
+        const float _frameDelta = 1000 / 2;    // <---- CHANGE FRAMERATE HERE ----
         // checks if frame is to early
         bool frameIsToEarly();
         // checks if frame is to early
