@@ -17,6 +17,8 @@
 class Animation {
     public:
         Animation();
+        // used to individually set value of _frameDelta
+        virtual void initialize() = 0;
         // calculates the next frame and updates the cube object
         virtual void renderNextFrame() = 0;
         // writes the next frame to the hardware
@@ -40,7 +42,7 @@ class Animation {
         // refresh rate of cube >>> D O N ' T  T O U C H! <<<
         const float _refreshDelta = 0;
         // framerate of the animation
-        const float _frameDelta = 1000 / 2;    // <---- CHANGE FRAMERATE HERE ----
+        float _frameDelta = 1000 / 3;    // <---- CHANGE DEFAULT FRAMERATE HERE ----
         // checks if frame is to early
         bool frameIsToEarly();
         // checks if frame is to early

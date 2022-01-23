@@ -32,3 +32,9 @@ void SimpleCubeAnimation::renderNextFrame() {
     
     counter++;
 }
+
+void SimpleCubeAnimation::initialize() {
+  // set your Framerate here
+  //int fps = 2; 
+  //_frameDelta = 1000 / fps;
+}

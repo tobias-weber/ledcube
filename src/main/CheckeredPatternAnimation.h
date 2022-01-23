@@ -7,6 +7,7 @@
 class CheckeredPatternAnimation:public Animation {
     public:
         void renderNextFrame();
+        void initialize();
         // Declare your own methods here
 };
 #endif

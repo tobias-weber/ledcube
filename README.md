@@ -10,7 +10,8 @@ Arduino Code for controlling a 5 x 5 x 5 RGB LED Cube with 74hc595 ICs
 6. Change the type of the animation object to your animation.
 
 Good to know:
-- Framerate can be changed in Animation.h
+- Framerate can be set in the initialize() method of your animation.
+- Default Framerate for animations that don't specify a framerate can be changed in Animation.h
 - Variables defined outside of a method are global and thus MUST HAVE A UNIQUE NAME!
 
 ## How to add new methods to change the led colors to the cube

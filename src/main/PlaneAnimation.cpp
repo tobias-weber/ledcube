@@ -38,3 +38,9 @@ void PlaneAnimation::renderNextFrame() {
     }
     layer++;
 }
+
+void PlaneAnimation::initialize() {
+  // set your Framerate here
+  int fps = 2; 
+  _frameDelta = 1000 / fps;
+}

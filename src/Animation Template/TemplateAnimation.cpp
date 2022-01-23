@@ -22,3 +22,9 @@ void TemplateAnimation::renderNextFrame() {
     }
     _cube->clearLeds(); // Can be removed if the whole cube doesn't need to be reset every frame
 }
+
+void TemplateAnimation::initialize() {
+  // set your Framerate here
+  //int fps = 2; 
+  //_frameDelta = 1000 / fps;
+}

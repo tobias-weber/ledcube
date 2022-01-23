@@ -28,6 +28,8 @@ void Animation::assignCharacterLibrary(CharacterLibrary* characterLibrary) {
   _charLib = characterLibrary;
 }
 
+void Animation::initialize() {
+}
 // writes the next frame to the hardware
 void Animation::showNextFrame() {
   // check if rewriting of current frame is already necessary. Minimizes jitter

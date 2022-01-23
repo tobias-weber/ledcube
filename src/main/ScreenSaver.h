@@ -9,5 +9,6 @@ class ScreenSaver:public Animation {
         void renderNextFrame();
         int newDirection(int oldDirection);
         int limit(int coord);
+        void initialize();
 };
 #endif

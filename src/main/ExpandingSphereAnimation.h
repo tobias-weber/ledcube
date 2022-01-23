@@ -1,10 +1,10 @@
 // protects user from including library twice
-#ifndef TextAnimation_h
-#define TextAnimation_h
+#ifndef ExpandingSphereAnimation_h
+#define ExpandingSphereAnimation_h
 
 #include "Animation.h"
 
-class TextAnimation:public Animation {
+class ExpandingSphereAnimation:public Animation {
     public:
         void renderNextFrame();
         void initialize();

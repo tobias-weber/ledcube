@@ -52,3 +52,9 @@ void CheckeredPatternAnimation::renderNextFrame() {
     free(lightPlane1);
     cpFrame = (cpFrame + 1) % 2;
 }
+
+void CheckeredPatternAnimation::initialize() {
+  // set your Framerate here
+  //int fps = 2; 
+  //_frameDelta = 1000 / fps;
+}

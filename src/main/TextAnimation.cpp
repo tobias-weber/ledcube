@@ -44,3 +44,9 @@ void TextAnimation::renderNextFrame() {
     textLayer++;
 
 }
+
+void TextAnimation::initialize() {
+  // set your Framerate here
+  //int fps = 2; 
+  //_frameDelta = 1000 / fps;
+}

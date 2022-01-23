@@ -57,3 +57,9 @@ void RandomColorsAnimation::renderNextFrame() {
     
     rcFrame++;
 }
+
+void RandomColorsAnimation::initialize() {
+  // set your Framerate here
+  //int fps = 2; 
+  //_frameDelta = 1000 / fps;
+}
