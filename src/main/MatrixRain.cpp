@@ -15,7 +15,7 @@
 //.............................................
 //BEGIN: Variables used by this animation...
 //.............................................
-byte spawn = 0;
+byte spawn = 125;
 byte spawnProbability = 100;
 
 void MatrixRain::renderNextFrame() {
@@ -28,25 +28,45 @@ void MatrixRain::renderNextFrame() {
     byte ledID;
     for (layer = 0; layer < 4; layer++) {
       for (ledID = 0; ledID < 25; ledID++) {
-        _cube->setLed(layer, ledID, _cube->getLed(25 * layer + ledID))
+        if (_cube->getLed(25 * layer + ledID) == 0 && _cube->getLed(25 * (layer + 1) + ledID) > 0) {
+          _cube->setLed(layer, ledID, 0b000101);
+
+        } else if (_cube->getLed(25 * (layer + 1) + ledID) > 0){
+          _cube->setLed(layer, ledID, 0b000100);
+
+        } else {
+          _cube->setLed(layer, ledID, 0);
+        }
+      }
+    }
+
+    for (layer = 0; layer < 4; layer++) {
+      for (ledID = 0; ledID < 25; ledID++) {
+        if (_cube->getLed(25 * layer + ledID) == 0 && _cube->getLed(25 * (layer + 1) + ledID) > 0) {
+        }
       }
     }
     // clear upper layer
-    _cube->setPlane(2, 4, 0);
+    _cube->setPlane(2, 4, (byte) 0);
     // add trail of previous drop
-    _cube->setLed(spawn, 0b000100);
+    if (spawn < 125) {
+      _cube->setLed(spawn, 0b000100);
+    }
     // spawn new drop
     if (random(0, 99) < spawnProbability) {
-      spawn = random(0, 25);
+      if (random(0,4) <= 2) {
+        // 75 %
+        spawn = random(0, 25) + 100;
+        _cube->setLed(spawn, 0b000100);
+      }
     } else {
-      spawn = 0;
+      spawn = 125;
     }
     // set new drop
-    _cube->setLed(spawn, 0b000100);
 }
 
 void MatrixRain::initialize() {
   // set your Framerate here
-  int fps = 5; 
+  int fps = 8; 
   _frameDelta = 1000 / fps;
 }
