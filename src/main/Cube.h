@@ -53,9 +53,5 @@ class Cube {
         // Draws a single straight line. The line starts at start, goes in the (+) direction of axis and
         // extends for length leds
         void setStraightLine(byte axis, byte start, byte length, byte color, byte blendMode);
-
-        // Draws the edges of a rotated cube
-        // Rotation: 0..3   (0 is unrotated, the next rotation after 3 would be 0 again)
-        void setRotatedBlock(byte rotation, byte color);
 };
 #endif

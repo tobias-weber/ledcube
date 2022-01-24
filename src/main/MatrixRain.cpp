@@ -67,6 +67,6 @@ void MatrixRain::renderNextFrame() {
 
 void MatrixRain::initialize() {
   // set your Framerate here
-  int fps = 8; 
+  int fps = 10; 
   _frameDelta = 1000 / fps;
 }
