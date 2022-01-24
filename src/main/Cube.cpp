@@ -223,6 +223,7 @@ void Cube::setPlane(byte axis, byte k, byte color, byte blendMode) {
   }
 }
 
+// Size 1..3
 void Cube::setBlock(byte size, byte color, bool drawEdges, bool drawFaces, bool drawFill) {
   switch (size)
   {
@@ -597,7 +598,96 @@ void Cube::setSphere(byte size, byte color, bool drawSurface, bool drawFill) {
       break;
       
     }
-
-
-      
   }
+
+// Draws a diagonal plane.
+// axis: the axis in which the plane lies
+// k: the k-th diagonal plane will be drawn
+// blendMode:  1 = "Mask" doesn't really make sense here
+// isFlipped: If true, plane is turned around axis by 90 degrees
+void Cube::setDiagonalPlane(byte axis, byte k, byte color, byte blendMode, bool isFlipped) {
+  if (k > 8 || axis > 2) return;
+
+  byte i;
+  byte nLines = 0; // Number of lines that this plane consists of
+  byte offsets[] = {30, 20, 24, 26, 6, 4}; //difference of the startpoints of two lines in a single plane
+  byte offset; // the difference used for this specific plane
+  byte start; // the startpoint of the first line of this specific plane
+
+  // set offset
+  if (isFlipped) {
+    offset = offsets[2 * axis + 1];
+  } else {
+    offset = offsets[2 * axis];
+  }
+
+  // set nLines and start
+  switch (axis)
+  {
+  case 0:
+    if (k < 5) {
+      nLines = k + 1;
+      start = (isFlipped) ? k * 5 : 20 - 5 * k;
+    } else {
+      nLines = 9 - k;
+      start = (isFlipped) ? 20 + 25 * (k - 4) : 25 * (k - 4);
+    }
+    break;
+
+  case 1:
+    if (k < 5) {
+      nLines = k + 1;
+      start = (isFlipped) ? 4 - k : k;
+    } else {
+      nLines = 9 - k;
+      start = (isFlipped) ? 25 * (k - 4): 4 + 25 * (k - 4);
+    }
+    break;
+
+  case 2:
+    if (k < 5) {
+      nLines = k + 1;
+      start = (isFlipped) ? k : 20 - 5 * k;
+    } else {
+      nLines = 9 - k;
+      start = (isFlipped) ? 4 + 5 * (k - 4) : k - 4;
+    }
+    break;
+  }
+
+  // Draw plane, consisting of nLines straight lines.
+  for (i = 0; i < nLines; i++) {
+    setStraightLine(axis, start + offset * i, 5, color, blendMode);
+  }
+}
+
+// Draws a single straight line. The line starts at start, goes in the (+) direction of axis and
+// extends for length leds
+void Cube::setStraightLine(byte axis, byte start, byte length, byte color, byte blendMode) {
+  if (blendMode == 1 && color == 0) {
+    return;
+  }
+
+  int i;
+  byte offset = 1;
+  if (axis == 1) {
+    offset = 5;
+  } else if (axis == 2) {
+    offset = 25;
+  }
+
+  switch (blendMode)
+  {
+  case 2:
+    for (i = 0; i < length; i++) _cubearray[start + i * offset] &= color;
+    break;
+
+  case 3:
+    for (i = 0; i < length; i++) _cubearray[start + i * offset] |= color;
+    break;
+
+  default:
+    for (i = 0; i < length; i++) _cubearray[start + i * offset] = color;
+    break;
+  }
+}
