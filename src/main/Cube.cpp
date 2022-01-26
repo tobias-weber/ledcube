@@ -664,7 +664,7 @@ void Cube::setDiagonalPlane(byte axis, byte k, byte color, byte blendMode, bool 
 // Draws a single straight line. The line starts at start, goes in the (+) direction of axis and
 // extends for length leds
 void Cube::setStraightLine(byte axis, byte start, byte length, byte color, byte blendMode) {
-  if (blendMode == 1 && color == 0) {
+  if (blendMode == 1 && color == 0 || length > 5) {
     return;
   }
 
