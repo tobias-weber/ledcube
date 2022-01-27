@@ -5,9 +5,12 @@
 #include "Animation.h"
 
 class CheckeredPatternAnimation:public Animation {
+    private:
+        // Declare your own variables here
+        byte cpFrame = 0;
     public:
+        CheckeredPatternAnimation();
         void renderNextFrame();
-        void initialize();
         // Declare your own methods here
 };
 #endif

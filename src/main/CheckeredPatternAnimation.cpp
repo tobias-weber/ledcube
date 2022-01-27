@@ -11,11 +11,6 @@
 //
 //.............................................
 
-//.............................................
-//BEGIN: Variables used by this animation...
-//.............................................
-byte cpFrame = 0;
-
 void CheckeredPatternAnimation::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
     if (frameIsToEarly()) {
@@ -53,7 +48,7 @@ void CheckeredPatternAnimation::renderNextFrame() {
     cpFrame = (cpFrame + 1) % 2;
 }
 
-void CheckeredPatternAnimation::initialize() {
+CheckeredPatternAnimation::CheckeredPatternAnimation() {
   // set your Framerate here
   //int fps = 2; 
   //_frameDelta = 1000 / fps;

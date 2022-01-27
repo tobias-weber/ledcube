@@ -5,9 +5,12 @@
 #include "Animation.h"
 
 class PlaneAnimation:public Animation {
+    private:
+        byte state = 0;
+        byte layer = 0;
     public:
         void renderNextFrame();
-        void initialize();
+        PlaneAnimation();
         // Declare your own methods here
 };
 #endif

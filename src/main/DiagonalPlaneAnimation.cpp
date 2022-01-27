@@ -6,16 +6,10 @@
 
 //.............................................
 // DESCRIPTION:
-// please describe your animation briefly
+// Diagonal planes that move through each other
 //
 //
 //.............................................
-
-//.............................................
-//BEGIN: Variables used by this animation...
-//.............................................
-byte dpCounter = 0;
-boolean dpFlip = false;
 
 void DiagonalPlaneAnimation::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
@@ -33,7 +27,7 @@ void DiagonalPlaneAnimation::renderNextFrame() {
     }
 }
 
-void DiagonalPlaneAnimation::initialize() {
+DiagonalPlaneAnimation::DiagonalPlaneAnimation() {
   // set your Framerate here
   int fps = 2; 
   _frameDelta = 1000 / fps;

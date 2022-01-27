@@ -11,13 +11,6 @@
 //
 //.............................................
 
-//.............................................
-//BEGIN: Variables used by this animation...
-//.............................................
-float sineCounter = 0;
-float edge = PI * 3 / 5;
-byte sineColors[] = {0b000001, 0b000101, 0b000100, 0b010100, 0b010000};
-
 void SineAnimation::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
     if (frameIsToEarly()) {
@@ -44,7 +37,7 @@ float SineAnimation::fmap(float x, float in_min, float in_max, float out_min, fl
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-void SineAnimation::initialize() {
+SineAnimation::SineAnimation() {
   // set your Framerate here
   int fps = 15; 
   _frameDelta = 1000 / fps;

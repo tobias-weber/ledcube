@@ -11,17 +11,6 @@
 //
 //.............................................
 
-//.............................................
-//BEGIN: Variables used by this animation...
-//.............................................
-
-int esCounter = 1;
-byte esSize = 1;
-byte esTargetSize = 4;
-int esDirection = 1;
-byte esColor = 0;
-byte esInnerColor = 0;
-byte esColors[] = {0b000001, 0b010000, 0b010100, 0b010001, 0b000101, 0b010101};
 
 void ExpandingSphereAnimation::renderNextFrame() {
   // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
@@ -75,7 +64,7 @@ void ExpandingSphereAnimation::renderNextFrame() {
 
 }
 
-void ExpandingSphereAnimation::initialize() {
+ExpandingSphereAnimation::ExpandingSphereAnimation() {
   int fps = 2; // set your Framerate here
   _frameDelta = 1000 / fps;
 }

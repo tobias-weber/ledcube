@@ -5,9 +5,12 @@
 #include "Animation.h"
 
 class DiagonalPlaneAnimation:public Animation {
+    private:
+        byte dpCounter = 0;
+        boolean dpFlip = false;
     public:
         void renderNextFrame();
-        void initialize();
+        DiagonalPlaneAnimation();
         // Declare your own methods here
 };
 #endif

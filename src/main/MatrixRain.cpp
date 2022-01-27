@@ -8,15 +8,10 @@
 // DESCRIPTION:
 // please describe your animation briefly
 //
-// green reindops falling down, similar to the
+// green raindops falling down, similar to the
 // famous green letter rain animation in matrix
 //.............................................
 
-//.............................................
-//BEGIN: Variables used by this animation...
-//.............................................
-byte spawn = 125;
-byte spawnProbability = 100;
 
 void MatrixRain::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
@@ -65,7 +60,7 @@ void MatrixRain::renderNextFrame() {
     // set new drop
 }
 
-void MatrixRain::initialize() {
+MatrixRain::MatrixRain() {
   // set your Framerate here
   int fps = 10; 
   _frameDelta = 1000 / fps;

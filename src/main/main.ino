@@ -32,7 +32,6 @@ void setup() {
   pinMode(MOS_LAYER_0 + 3, OUTPUT);
   pinMode(MOS_LAYER_0 + 4, OUTPUT);
 
-  animation.initialize();
 }
 
 void loop() {

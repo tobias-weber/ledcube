@@ -5,9 +5,12 @@
 #include "Animation.h"
 
 class MatrixRain:public Animation {
+    private:
+        byte spawn = 125;
+        byte spawnProbability = 100;
     public:
         void renderNextFrame();
-        void initialize();
+        MatrixRain();
         // Declare your own methods here
 };
 #endif
