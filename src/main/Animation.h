@@ -17,8 +17,6 @@
 class Animation {
     public:
         Animation();
-        // used to individually set value of _frameDelta
-        virtual void initialize() = 0;
         // calculates the next frame and updates the cube object
         virtual void renderNextFrame() = 0;
         // writes the next frame to the hardware

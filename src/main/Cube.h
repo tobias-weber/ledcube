@@ -6,6 +6,8 @@
 #include "Arduino.h"
 
 class Cube {
+    private:
+        byte _cubearray[125] = {0};
     public:
         Cube();
         // set all leds to 0
@@ -23,6 +25,8 @@ class Cube {
         // color is returned in the format: 0b2b1g2g1r2r1
         byte getColor(byte r, byte g, byte b);
 
+        
+
 
 
         // B L E N D M O D E S
@@ -30,6 +34,15 @@ class Cube {
         // 1    mask: only a color != 0 will have an effect
         // 2    AND: store bitwise AND of current color and new color
         // 3    OR: store bitwise OR of current color and new color
+        // 4    XOR: store bitwise XOR of current color and new color
+        // 5    oldHasPriority: only if the previously stored color is 0, the new color will be stored
+
+        // set color of single Led with blendMode
+        void setBlendedLed(byte id, byte color, byte blendMode);
+        // copy the contents of the given byte array(must have length 125) into the cubearray
+        void setCube(byte* src);
+        // copy the contents of the cube array into the given byte array (must have length 125)
+        void copyCube(byte* dst);
 
         // Set colors of a plane according to a blendMode
         void setPlane(byte axis, byte k, byte color);

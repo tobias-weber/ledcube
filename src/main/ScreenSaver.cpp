@@ -4,21 +4,6 @@
 //include class header
 #include "ScreenSaver.h"
 
-//.............................................
-//BEGIN: Variables used by this animation...
-//.............................................
-
-int x_pos = 0;
-int y_pos = 1;
-int z_pos = 2;
-
-int x_change = 1;
-int y_change = 1;
-int z_change = 1;
-
-byte screenSaverColor = 0;
-byte screenSaverColors[] = {0b000001, 0b000100, 0b000101, 0b010000, 0b010001, 0b010100, 0b010101};
-
 void ScreenSaver::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
     if (frameIsToEarly()) {
@@ -90,7 +75,7 @@ int ScreenSaver::limit(int coord) {
   return coord; 
 }
 
-void ScreenSaver::initialize() {
+ScreenSaver::ScreenSaver() {
   // set your Framerate here
   //int fps = 2; 
   //_frameDelta = 1000 / fps;

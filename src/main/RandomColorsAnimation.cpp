@@ -11,17 +11,6 @@
 // a plane coming from a random direction.
 //.............................................
 
-//.............................................
-// BEGIN: Variables used by this animation...
-//.............................................
-
-byte rcColors[] = {0b000001, 0b010000, 0b000100, 0b010100, 0b010001, 0b000101, 0b010101};
-byte rcFrame = 0;
-byte rcLayerPos = 0;
-byte rcLayerAxis = 0;
-byte rcLayerColor = 1;
-byte rcStart = 4;
-
 void RandomColorsAnimation::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
     if (frameIsToEarly()) {
@@ -58,7 +47,7 @@ void RandomColorsAnimation::renderNextFrame() {
     rcFrame++;
 }
 
-void RandomColorsAnimation::initialize() {
+RandomColorsAnimation::RandomColorsAnimation() {
   // set your Framerate here
   //int fps = 2; 
   //_frameDelta = 1000 / fps;

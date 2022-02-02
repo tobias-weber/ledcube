@@ -3,8 +3,6 @@
 
 // include header for Cube
 #include "Cube.h"
-
-byte _cubearray[125] = {0};
         
 // contructor
 Cube::Cube() {
@@ -46,9 +44,53 @@ byte Cube::getColor(byte r, byte g, byte b) {
   return r + g << 2 + b << 4;
 }
 
+
+
 // ............................
 // More advanced set methods
 // ............................
+
+// set color of single Led with blendMode
+void Cube::setBlendedLed(byte id, byte color, byte blendMode) {
+  if (color == 0 && blendMode == 1) return;
+
+  switch (blendMode)
+  {
+  case 2:
+    _cubearray[id] &= color;
+    break;
+
+  case 3:
+    _cubearray[id] |= color;
+    break;
+
+  case 4:
+    _cubearray[id] ^= color;
+    break;
+
+  case 5:
+    if (_cubearray[id] == 0) _cubearray[id] = color;
+    break;
+
+  default:
+    _cubearray[id] = color;
+    break;
+  }
+}
+
+// copy the contents of the given byte array(must have length 125) into the cubearray
+void Cube::setCube(byte* src) {
+  memcpy(_cubearray, src, 125);
+
+}
+
+// copy the contents of the cube array into the given byte array (must have length 125)
+void Cube::copyCube(byte* dst) {
+  memcpy(dst, _cubearray, 125);
+}
+
+
+
 
 // Set all leds in the k-th normal plane of axis to color.
 // Axis can be 0 -> x     1 -> y     2 -> z (= set color of a layer)
@@ -106,11 +148,7 @@ void Cube::setPlane(byte axis, byte k, byte colors[25]) {
   }
 }
 
-// Set colors of a plane according to a blendMode:
-// 0    default behavior
-// 1    mask: only a color != 0 will have an effect
-// 2    AND: store bitwise AND of current color and new color
-// 3    OR: store bitwise OR of current color and new color
+// Set colors of a plane according to a blendMode
 void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
   if (blendMode == 0) {
     setPlane(axis, k, colors);
@@ -128,6 +166,10 @@ void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
             _cubearray[cubeIdx] = _cubearray[cubeIdx] & colors[i];
           } else if (blendMode == 3) {
             _cubearray[cubeIdx] = _cubearray[cubeIdx] | colors[i];
+          } else if (blendMode == 4) {
+            _cubearray[cubeIdx] ^= colors[i];
+          } else if (blendMode == 5 && _cubearray[cubeIdx] == 0) {
+            _cubearray[cubeIdx] = colors[i];
           }
           
         }
@@ -147,6 +189,10 @@ void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
               _cubearray[cubeIdx] = _cubearray[cubeIdx] & colors[colorIdx];
             } else if (blendMode == 3) {
               _cubearray[cubeIdx] = _cubearray[cubeIdx] | colors[colorIdx];
+            }  else if (blendMode == 4) {
+              _cubearray[cubeIdx] ^= colors[colorIdx];
+            }  else if (blendMode == 5 && _cubearray[cubeIdx] == 0) {
+              _cubearray[cubeIdx] = colors[i];
             }
           }
         }
@@ -163,6 +209,10 @@ void Cube::setPlane(byte axis, byte k, byte colors[25], byte blendMode) {
             _cubearray[cubeIdx] = _cubearray[cubeIdx] & colors[i];
           } else if (blendMode == 3) {
             _cubearray[cubeIdx] = _cubearray[cubeIdx] | colors[i];
+          } else if (blendMode == 4) {
+            _cubearray[cubeIdx] ^= colors[i];
+          } else if (blendMode == 5 && _cubearray[cubeIdx] == 0) {
+            _cubearray[cubeIdx] = colors[i];
           }
         }
         break;
@@ -186,6 +236,10 @@ void Cube::setPlane(byte axis, byte k, byte color, byte blendMode) {
             _cubearray[cubeIdx] = _cubearray[cubeIdx] & color;
           } else if (blendMode == 3) {
             _cubearray[cubeIdx] = _cubearray[cubeIdx] | color;
+          } else if (blendMode == 4) {
+            _cubearray[cubeIdx] ^= color;
+          } else if (blendMode == 5 && _cubearray[cubeIdx] == 0) {
+            _cubearray[cubeIdx] = color;
           }
           
         }
@@ -202,6 +256,10 @@ void Cube::setPlane(byte axis, byte k, byte color, byte blendMode) {
               _cubearray[cubeIdx] = _cubearray[cubeIdx] & color;
             } else if (blendMode == 3) {
               _cubearray[cubeIdx] = _cubearray[cubeIdx] | color;
+            } else if (blendMode == 4) {
+              _cubearray[cubeIdx] ^= color;
+            } else if (blendMode == 5 && _cubearray[cubeIdx] == 0) {
+              _cubearray[cubeIdx] = color;
             }
           }
         }
@@ -216,6 +274,10 @@ void Cube::setPlane(byte axis, byte k, byte color, byte blendMode) {
             _cubearray[cubeIdx] = _cubearray[cubeIdx] & color;
           } else if (blendMode == 3) {
             _cubearray[cubeIdx] = _cubearray[cubeIdx] | color;
+          }  else if (blendMode == 4) {
+            _cubearray[cubeIdx] ^= color;
+          } else if (blendMode == 5 && _cubearray[cubeIdx] == 0) {
+            _cubearray[cubeIdx] = color;
           }
         }
         break;
@@ -664,7 +726,7 @@ void Cube::setDiagonalPlane(byte axis, byte k, byte color, byte blendMode, bool 
 // Draws a single straight line. The line starts at start, goes in the (+) direction of axis and
 // extends for length leds
 void Cube::setStraightLine(byte axis, byte start, byte length, byte color, byte blendMode) {
-  if (blendMode == 1 && color == 0) {
+  if (blendMode == 1 && color == 0 || length > 5) {
     return;
   }
 
@@ -686,8 +748,19 @@ void Cube::setStraightLine(byte axis, byte start, byte length, byte color, byte 
     for (i = 0; i < length; i++) _cubearray[start + i * offset] |= color;
     break;
 
+  case 4:
+    for (i = 0; i < length; i++) _cubearray[start + i * offset] ^= color;
+    break;
+
+  case 5:
+    for (i = 0; i < length; i++) {
+      if (_cubearray[start + i * offset] == 0) _cubearray[start + i * offset] = color;
+    }
+    break;
+
   default:
     for (i = 0; i < length; i++) _cubearray[start + i * offset] = color;
     break;
   }
 }
+

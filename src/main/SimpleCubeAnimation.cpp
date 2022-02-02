@@ -4,13 +4,6 @@
 //include class header
 #include "SimpleCubeAnimation.h"
 
-//.............................................
-//BEGIN: Variables used by this animation...
-//.............................................
-int counter = 0;
-byte colorsTable[] = {0b000001, 0, 0, 0b000100, 0, 0, 0b000101, 0, 0, 0b010000, 0, 0, 0b010001, 0, 0, 0b010100, 0, 0, 0b010101, 0, 0};
-byte colorsTableSize = 21;
-
 void SimpleCubeAnimation::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
     if (frameIsToEarly()) {
@@ -33,7 +26,7 @@ void SimpleCubeAnimation::renderNextFrame() {
     counter++;
 }
 
-void SimpleCubeAnimation::initialize() {
+SimpleCubeAnimation::SimpleCubeAnimation() {
   // set your Framerate here
   //int fps = 2; 
   //_frameDelta = 1000 / fps;

@@ -1,4 +1,4 @@
-#include "DiagonalPlaneAnimation.h"
+#include "MatrixRain.h"
 #include "Cube.h"
 #include "Writer.h"
 #include "CharacterLibrary.h"
@@ -15,7 +15,7 @@ const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
 Writer writer();
 // animation to display
-DiagonalPlaneAnimation animation;           // <------------- CHOOSE ANIMATION HERE --------------
+MatrixRain animation;           // <------------- CHOOSE ANIMATION HERE --------------
 
 void setup() {
   animation.assignCube(&cube);
@@ -33,7 +33,6 @@ void setup() {
   pinMode(MOS_LAYER_0 + 3, OUTPUT);
   pinMode(MOS_LAYER_0 + 4, OUTPUT);
 
-  animation.initialize();
 }
 
 void loop() {

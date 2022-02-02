@@ -5,9 +5,10 @@
 #include "Animation.h"
 
 class TemplateAnimation:public Animation {
+    private:
+        // Declare your class variables and your own methods here. 
     public:
         void renderNextFrame();
-        void initialize();
-        // Declare your own methods here
+        TemplateAnimation();
 };
 #endif

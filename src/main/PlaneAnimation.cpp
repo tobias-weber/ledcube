@@ -4,12 +4,6 @@
 //include class header
 #include "PlaneAnimation.h"
 
-//.............................................
-//BEGIN: Variables used by this animation...
-//.............................................
-byte state = 0;
-byte layer = 0;
-
 void PlaneAnimation::renderNextFrame() {
     // check if calculation of next frame is already necessary. Else skip to refreshing current frame for less flicker
     if (frameIsToEarly()) {
@@ -39,7 +33,7 @@ void PlaneAnimation::renderNextFrame() {
     layer++;
 }
 
-void PlaneAnimation::initialize() {
+PlaneAnimation::PlaneAnimation() {
   // set your Framerate here
   int fps = 2; 
   _frameDelta = 1000 / fps;
