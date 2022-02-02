@@ -37,6 +37,6 @@ SpeedTest::SpeedTest() {
   // or initialize it in the header file
 
   // set your Framerate here
-  int fps = 1000; 
+  int fps = 2000; 
   _frameDelta = 1000 / fps;
 }

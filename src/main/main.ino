@@ -1,4 +1,4 @@
-#include "MatrixRain.h"
+#include "SpeedTest.h"
 #include "Cube.h"
 #include "Writer.h"
 #include "CharacterLibrary.h"
@@ -15,7 +15,7 @@ const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
 Writer writer;
 // animation to display
-MatrixRain animation;           // <------------- CHOOSE ANIMATION HERE --------------
+SpeedTest animation;           // <------------- CHOOSE ANIMATION HERE --------------
 
 void setup() {
   animation.assignCube(&cube);
