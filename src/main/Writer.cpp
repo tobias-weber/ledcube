@@ -7,11 +7,7 @@
 // include header for cube
 
 // Writer
-Writer::Writer(byte serialData, byte serialShift, byte serialLatch, byte mosfetLayer0) {
-    this->_serialData = serialData;
-    this->_serialShift = serialShift;
-    this->_serialLatch = serialLatch; 
-    this->_mosfetLayer0 = mosfetLayer0;
+Writer::Writer() {
 }
 
 // assigns the cube to this writer
@@ -52,34 +48,39 @@ void Writer::writeCube() {
 // activates the selected layer
 // int used to prevent cast from modulo operator
 void Writer::setLayer(int layer) {
-  digitalWrite(_mosfetLayer0 + layer, LOW);
+  if (layer == 0) {
+    PORTD = PORTD & B11111110;
+  } else if (layer == 1) {
+    PORTD = PORTD & B11111101;
+  } else if (layer == 2) {
+    PORTD = PORTD & B11111011;
+  } else if (layer == 3) {
+    PORTD = PORTD & B11110111;
+  } else {
+    PORTD = PORTD & B11101111;
+  }
 }
 
 // blacks the whole cube
 void Writer::blackout() {
-  digitalWrite(_mosfetLayer0, HIGH);
-  digitalWrite(_mosfetLayer0 + 1, HIGH);
-  digitalWrite(_mosfetLayer0 + 2, HIGH);
-  digitalWrite(_mosfetLayer0 + 3, HIGH);
-  digitalWrite(_mosfetLayer0 + 4, HIGH);
+  PORTD = PORTD | B00011111;
 }
 
 // triggers the latch ofa the shift register
 void Writer::triggerLatch() {
-  digitalWrite(_serialLatch, LOW);
-  digitalWrite(_serialLatch, HIGH);
+  PORTD = PORTD & B01111111;
+  PORTD = PORTD | B10000000;
 }
 
 // pushes a single high bit to the hardware cube
 void Writer::pushHigh() {
-  digitalWrite(_serialData, LOW);
-  digitalWrite(_serialShift, LOW);
-  digitalWrite(_serialShift, HIGH);
+  PORTD = PORTD & B10011111;
+  PORTD = PORTD | B01000000;
 }
 
 // pushes a single low bit to the hardware cube
 void Writer::pushLow() {
-  digitalWrite(_serialData, HIGH);
-  digitalWrite(_serialShift, LOW);
-  digitalWrite(_serialShift, HIGH);
+  PORTD = PORTD | B00100000;
+  PORTD = PORTD & B10111111;
+  PORTD = PORTD | B01000000;
 }

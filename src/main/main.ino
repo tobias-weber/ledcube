@@ -8,11 +8,12 @@ CharacterLibrary characterLibrary;
 // cube object representing the Cube
 Cube cube;
 // writer used to write cube to hardware
+// constants only used for pin setup. To change output pins also modify writer.cpp!
 const byte SERIAL_DATA = 5;
 const byte SERIAL_SHIFT = 6;
 const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
-Writer writer(SERIAL_DATA, SERIAL_SHIFT, SERIAL_LATCH, MOS_LAYER_0);
+Writer writer();
 // animation to display
 DiagonalPlaneAnimation animation;           // <------------- CHOOSE ANIMATION HERE --------------
 
