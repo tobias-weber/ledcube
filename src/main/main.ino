@@ -13,7 +13,7 @@ const byte SERIAL_DATA = 5;
 const byte SERIAL_SHIFT = 6;
 const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
-Writer writer();
+Writer writer;
 // animation to display
 MatrixRain animation;           // <------------- CHOOSE ANIMATION HERE --------------
 
