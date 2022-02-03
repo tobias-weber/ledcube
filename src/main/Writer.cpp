@@ -32,16 +32,35 @@ void Writer::writeCube() {
       ledData = _cube->getLed(ledIndex);
       for (colorIndex = 1; colorIndex < 0b100000; colorIndex <<= 2) {
         if (ledData & colorIndex) {
-          pushHigh();
+          // pushes a single high bit to the hardware cube
+          PORTD = PORTD & B10011111;
+          PORTD = PORTD | B01000000;;
         } else {
-          pushLow();
+          // pushes a single low bit to the hardware cube
+          PORTD = PORTD | B00100000;
+          PORTD = PORTD & B10111111;
+          PORTD = PORTD | B01000000;
         }
       }
     }
-    blackout();
-    triggerLatch();
-    setLayer(layerIndex);
-   
+    // blacks the whole cube
+    PORTD = PORTD | B00011111;
+    // triggers the latch of the shift register
+    PORTD = PORTD & B01111111;
+    PORTD = PORTD | B10000000;
+    // activates the selected layer
+    // int used to prevent cast from modulo operator
+    if (layerIndex == 0) {
+      PORTD = PORTD & B11111110;
+    } else if (layerIndex == 1) {
+      PORTD = PORTD & B11111101;
+    } else if (layerIndex == 2) {
+      PORTD = PORTD & B11111011;
+    } else if (layerIndex == 3) {
+      PORTD = PORTD & B11110111;
+    } else {
+      PORTD = PORTD & B11101111;
+    }
   }
   // Compensate for last layer
   int sleepTimeMicros = (micros() - previousMicros) / _PUSH_TIME_COMPENSATION_DIVISOR;
@@ -50,12 +69,15 @@ void Writer::writeCube() {
   while (currentMicros - previousMicros < sleepTimeMicros) {
     currentMicros = micros();
   }
-  blackout();
+  // blacks the whole cube
+  PORTD = PORTD | B00011111;
 }
 
 // activates the selected layer
 // int used to prevent cast from modulo operator
 void Writer::setLayer(int layer) {
+  // activates the selected layer
+  // int used to prevent cast from modulo operator
   if (layer == 0) {
     PORTD = PORTD & B11111110;
   } else if (layer == 1) {
@@ -67,28 +89,4 @@ void Writer::setLayer(int layer) {
   } else {
     PORTD = PORTD & B11101111;
   }
-}
-
-// blacks the whole cube
-void Writer::blackout() {
-  PORTD = PORTD | B00011111;
-}
-
-// triggers the latch ofa the shift register
-void Writer::triggerLatch() {
-  PORTD = PORTD & B01111111;
-  PORTD = PORTD | B10000000;
-}
-
-// pushes a single high bit to the hardware cube
-void Writer::pushHigh() {
-  PORTD = PORTD & B10011111;
-  PORTD = PORTD | B01000000;
-}
-
-// pushes a single low bit to the hardware cube
-void Writer::pushLow() {
-  PORTD = PORTD | B00100000;
-  PORTD = PORTD & B10111111;
-  PORTD = PORTD | B01000000;
 }
