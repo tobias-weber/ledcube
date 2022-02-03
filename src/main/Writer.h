@@ -23,6 +23,11 @@ class Writer {
         // pointer to the cube the writer is responsible for
         Cube *_cube;
         // push time compensation
-        const byte _PUSH_TIME_COMPENSATION_DIVISOR = 10; // the higher this value, the shorter layer 0 will light up compared to the other layers
+        // the higher this value, the shorter layer 0 will light up compared to the other layers
+        const byte _PUSH_TIME_COMPENSATION_DIVISOR = 10;
+        // counter for the pwn subframes
+        byte _pwmSubframe = 0;
+        // gamma corrected intensity values
+        byte _gammaIntensities[4] = {0, 1, 4, 8};
 };
 #endif
