@@ -27,7 +27,12 @@ class Writer {
         const byte _PUSH_TIME_COMPENSATION_DIVISOR = 10;
         // counter for the pwn subframes
         byte _pwmSubframe = 0;
-        // gamma corrected intensity values
-        byte _gammaIntensities[4] = {0, 1, 4, 8};
+
+        // Gamma corrected intensity values. 
+        // Defines for how many subframes a color-channel of an led will be active,
+        // depending on its intensity value (that indexes this array).
+        // Entry with index 0b11 defines total number of subframes.
+        byte _gammaIntensities[4] = {0, 1, 4, 10};
+        void writeSubframe();
 };
 #endif

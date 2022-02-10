@@ -17,6 +17,13 @@ void Writer::assignCube(Cube* cube){
 
 // pushes the next pwm cycle of the current cube to the hardware
 void Writer::writeCube() {
+  for (_pwmSubframe = 0; _pwmSubframe < _gammaIntensities[3]; _pwmSubframe++) { // update pwm counter, number of subframes is 7
+    writeSubframe();
+  }
+}
+
+// pushes a single subframe of the current cube to the hardware
+void Writer::writeSubframe() {
   byte colorMask;
   byte bitPositionCorrection;
   byte ledIndex; // 0-124
@@ -25,18 +32,14 @@ void Writer::writeCube() {
   byte ledData;
   unsigned long currentMicros;
   unsigned long previousMicros = micros();
-  // reset subframe counter after each cycle
-  if (_pwmSubframe > 7) {
-    _pwmSubframe = 0;
-  }
   // read led bytes in reverse order
   for(layerIndex = 4; layerIndex < 255; layerIndex--) { // because of byte overflow, < 255 is equivalent to >= 0
     for (positionIndex = 24; positionIndex < 255; positionIndex--) { // because of byte overflow, < 255 is equivalent to >= 0
       ledIndex = layerIndex * 25 + positionIndex;
       // read pwm encoded intensity levels of each color
       ledData = _cube->getLed(ledIndex);
-      bitPositionCorrection = 0b100;
-      for (colorMask = 0b11; colorMask < 0b110000; colorMask <<= 2) {
+      bitPositionCorrection = 0;
+      for (colorMask = 0b11; colorMask <= 0b110000; colorMask <<= 2) {
         if (_pwmSubframe < _gammaIntensities[(ledData & colorMask) >> bitPositionCorrection]) {
           // pushes a single high bit to the hardware cube
           PORTD = PORTD & B10011111;
@@ -47,7 +50,7 @@ void Writer::writeCube() {
           PORTD = PORTD & B10111111;
           PORTD = PORTD | B01000000;
         }
-        bitPositionCorrection -= 2;
+        bitPositionCorrection += 2;
       }
     }
     // blacks the whole cube
@@ -78,7 +81,4 @@ void Writer::writeCube() {
   }
   // blacks the whole cube
   PORTD = PORTD | B00011111;
-  // update pwm counter
-  _pwmSubframe++;
-}
 }

@@ -14,6 +14,9 @@
 //include header for char lib
 #include "CharacterLibrary.h"
 
+//include colors
+#include "ColorConstants.h"
+
 class Animation {
     public:
         Animation();

@@ -14,6 +14,8 @@ Arduino Code for controlling a 5 x 5 x 5 RGB LED Cube with 74hc595 ICs
 - Look at Cube.h to get an idea of what is already implemented to change leds.
 - Framerate can be set in the constructor of your animation.
 - Default Framerate for all animations that don't specify a framerate can be changed in Animation.h
+- **Up to 60 fps are guaranteed to work!** (even after the upgrade to pwm)
+- Instead of bitvalues, you can use the color constants defined in `ColorConstants.h`.
 
 ## How to add new methods to change the led colors to the cube
 1. Write your method in `Cube.cpp`.

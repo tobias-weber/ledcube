@@ -9,7 +9,7 @@ class SpeedTest:public Animation {
         // Declare your class variables and your own methods here. 
         byte color = 0;
         byte index = 0;
-        byte colors[7] = {0b000001, 0b010000, 0b000100, 0b010100, 0b010001, 0b000101, 0b010101};
+        byte colors[7] = {0b000011, 0b110000, 0b001100, 0b111100, 0b110011, 0b001111, 0b111111};
         long counter = 0;
         byte state = 0;
         int runTime = 2000; // in millis

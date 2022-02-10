@@ -3,12 +3,11 @@
 
 //include class header
 #include "SpeedTest.h"
-
 //.............................................
 // DESCRIPTION:
-// please describe your animation briefly
-//
-//
+// Tests how many times per second a new frame can be rendered
+// and then displays the result.
+// If state == 3, it will show a color cube for debugging.
 //.............................................
 
 void SpeedTest::renderNextFrame() {
@@ -70,6 +69,23 @@ void SpeedTest::renderNextFrame() {
         startTime = millis();
       }
 
+    } else {
+        _cube->setPlane(1,2,0b00010000, 3);
+        _cube->setPlane(0,2,0b00000100, 3);
+        _cube->setPlane(2,2,0b01, 3);
+
+        
+        _cube->setPlane(1,3,0b00100000, 3);
+        _cube->setPlane(0,3,0b00001000, 3);
+        _cube->setPlane(2,3,0b10, 3);
+        
+        _cube->setPlane(1,4,0b00110000, 3);
+        _cube->setPlane(0,4,0b00001100, 3);
+        _cube->setPlane(2,4,0b11, 3);
+
+        _cube->setPlane(1,0,(byte) 0);
+        _cube->setPlane(0,0,(byte) 0);
+        _cube->setPlane(2,0,(byte) 0);
     }
 }
 
