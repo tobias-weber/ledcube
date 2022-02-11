@@ -8,10 +8,31 @@
 class Cube {
     private:
         byte _cubearray[125] = {0};
+        byte _saturatedColors[18] = {
+            0b110000,
+            0b110100,
+            0b111000,
+            0b111100,
+            0b101100,
+            0b011100,
+            0b001100,
+            0b001101,
+            0b001110,
+            0b001111,
+            0b001011,
+            0b000111,
+            0b000011,
+            0b010011,
+            0b100011,
+            0b110011,
+            0b110010,
+            0b110001};
     public:
         Cube();
         // set all leds to 0
         void clearLeds();
+        // set all leds to the color specified
+        void setLeds(byte color);
         // set color by specifying x,y,z
         void setLed(byte x, byte y, byte z, byte color);
         // set color with unique led id (0-124)
@@ -24,7 +45,10 @@ class Cube {
         byte getLed(byte id);
         // color is returned in the format: 0b2b1g2g1r2r1
         byte getColor(byte r, byte g, byte b);
-
+        // return 6 bit color from hue, saturation and value. Warning: Slow
+        byte getColorFromHSV(int hue, float saturation, float value);
+        // return 6 bit color from an index (0..18) that corresponds to the hue.
+        byte getSaturatedColor(byte index);
         
 
 

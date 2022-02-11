@@ -1,4 +1,4 @@
-#include "SpeedTest.h"
+#include "HSVdemo.h"
 #include "Cube.h"
 #include "Writer.h"
 #include "CharacterLibrary.h"
@@ -15,7 +15,7 @@ const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
 Writer writer;
 // animation to display
-SpeedTest animation;           // <------------- CHOOSE ANIMATION HERE --------------
+HSVdemo animation;           // <------------- CHOOSE ANIMATION HERE --------------
 
 void setup() {
   animation.assignCube(&cube);

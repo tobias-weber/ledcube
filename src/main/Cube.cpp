@@ -15,6 +15,13 @@ void Cube::clearLeds() {
   }
 }
 
+// set all leds to the color specified
+void Cube::setLeds(byte color) {
+  for(int i = 0; i < 125; i++) {
+    _cubearray[i] = color;
+  }
+}
+
 // set color by specifying x,y,z
 void Cube::setLed(byte x, byte y, byte z, byte color) {
   _cubearray[x + 5 * y + 25 * z] = color;
@@ -44,6 +51,41 @@ byte Cube::getColor(byte r, byte g, byte b) {
   return r + g << 2 + b << 4;
 }
 
+// return 6 bit color from hue, saturation and value. Warning: Slow
+byte Cube::getColorFromHSV(int hue, float saturation, float value) {
+  float C = value * saturation;
+  float H = (hue % 360) / 60.f;
+  float X = C * (1 - abs(fmod(H, 2) - 1));
+  float m = value - C;
+  float r,g,b;
+
+  if(H < 1){
+      r = C,g = X,b = 0;
+  }
+  else if(H < 2){
+      r = X,g = C,b = 0;
+  }
+  else if(H < 3){
+      r = 0,g = C,b = X;
+  }
+  else if(H < 4){
+      r = 0,g = X,b = C;
+  }
+  else if(H < 5){
+      r = X,g = 0,b = C;
+  }
+  else{
+      r = C,g = 0,b = X;
+  }
+  byte R = (r+m)*3;
+  byte G = (g+m)*3;
+  byte B = (b+m)*3;
+  return (R << 4) + (G << 2) + B;
+}
+// return 6 bit color from an index (0..18) that corresponds to the hue.
+byte Cube::getSaturatedColor(byte index) {
+  return _saturatedColors[index % 18];
+}
 
 
 // ............................
