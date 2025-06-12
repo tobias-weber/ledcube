@@ -2,7 +2,7 @@
 #ifndef TextAnimation_h
 #define TextAnimation_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class TextAnimation:public Animation {
     private:

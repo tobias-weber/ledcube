@@ -1,7 +1,11 @@
 // include arduino default data types and functions
 #include "Arduino.h"
 
-#include <avr/pgmspace.h>
+#if (defined(__AVR__))
+#include <avr\pgmspace.h>
+#else
+#include <pgmspace.h>
+#endif
 
 // include header for char LUT
 #include "CharacterLUT.h"

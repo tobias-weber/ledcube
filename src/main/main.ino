@@ -1,7 +1,7 @@
-#include "HSVdemo.h"
-#include "Cube.h"
-#include "Writer.h"
-#include "CharacterLibrary.h"
+#include "src/animations/CombinedAnimation.h"
+#include "src/Cube.h"
+#include "src/Writer.h"
+#include "src/CharacterLibrary.h"
 
 // init character library
 CharacterLibrary characterLibrary;
@@ -15,9 +15,10 @@ const byte SERIAL_LATCH = 7;
 const byte MOS_LAYER_0 = 0;
 Writer writer;
 // animation to display
-HSVdemo animation;           // <------------- CHOOSE ANIMATION HERE --------------
+CombinedAnimation animation;           // <------------- CHOOSE ANIMATION HERE --------------
 
 void setup() {
+  //Serial.begin(9600);
   animation.assignCube(&cube);
   animation.assignCharacterLibrary(&characterLibrary);
   writer.assignCube(&cube);

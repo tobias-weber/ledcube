@@ -2,7 +2,7 @@
 #ifndef MatrixRain_h
 #define MatrixRain_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class MatrixRain:public Animation {
     private:

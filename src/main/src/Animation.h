@@ -48,5 +48,8 @@ class Animation {
         bool frameIsToEarly();
         // checks if frame is to early
         bool refreshIsToEarly();
+        // set dimming factor. 0 is full brightness, 255 is maximum dimming.
+        // Should usually not be changed by an individual animation.
+        byte _dimmingFactor = 0;
 };
 #endif

@@ -2,7 +2,7 @@
 #ifndef RandomColorsAnimation_h
 #define RandomColorsAnimation_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class RandomColorsAnimation:public Animation {
     private:

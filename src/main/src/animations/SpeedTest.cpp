@@ -18,6 +18,9 @@ void SpeedTest::renderNextFrame() {
 
     if (state == 0) {
       state++;
+      color = 0;
+      index = 0;
+      counter = 0;
       startTime = millis();
 
     } else if (state == 1) {
@@ -49,6 +52,10 @@ void SpeedTest::renderNextFrame() {
 
     } else if (state == 2) {
       _cube->clearLeds();
+      if (isBtnXReleased()) {
+        state++;
+        return;
+      }
       if (millis() - startTime < displayTime) {
         byte* plane = _charLib->getColoredCharacter(digits[0] + 26, 0b110000);
         _cube->setPlane(0, 4, plane);
@@ -69,7 +76,13 @@ void SpeedTest::renderNextFrame() {
         startTime = millis();
       }
 
-    } else {
+    } else if (state == 3) {
+      // Calibration Cube
+        if (isBtnXReleased()) {
+          state = 0;
+          _cube->clearLeds();
+          return;
+        }
         _cube->setPlane(1,2,0b00010000, 3);
         _cube->setPlane(0,2,0b00000100, 3);
         _cube->setPlane(2,2,0b01, 3);
@@ -87,6 +100,18 @@ void SpeedTest::renderNextFrame() {
         _cube->setPlane(0,0,(byte) 0);
         _cube->setPlane(2,0,(byte) 0);
     }
+    
+}
+
+bool SpeedTest::isBtnXReleased() {
+  bool isPressed = digitalRead(btnXPin);
+  if (isPressed) {
+    btnXPressed = true;
+  } else if (btnXPressed){
+    btnXPressed = false;
+    return true;
+  }
+  return false;
 }
 
 // C O N S T R U C T O R

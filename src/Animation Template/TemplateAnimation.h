@@ -2,7 +2,7 @@
 #ifndef TemplateAnimation_h
 #define TemplateAnimation_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class TemplateAnimation:public Animation {
     private:

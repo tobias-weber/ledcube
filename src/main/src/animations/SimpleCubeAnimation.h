@@ -2,7 +2,7 @@
 #ifndef SimpleCubeAnimation_h
 #define SimpleCubeAnimation_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class SimpleCubeAnimation:public Animation {
     private:

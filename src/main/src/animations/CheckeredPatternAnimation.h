@@ -2,7 +2,7 @@
 #ifndef CheckeredPatternAnimation_h
 #define CheckeredPatternAnimation_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class CheckeredPatternAnimation:public Animation {
     private:

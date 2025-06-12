@@ -24,10 +24,10 @@ void MatrixRain::renderNextFrame() {
     for (layer = 0; layer < 4; layer++) {
       for (ledID = 0; ledID < 25; ledID++) {
         if (_cube->getLed(25 * layer + ledID) == 0 && _cube->getLed(25 * (layer + 1) + ledID) > 0) {
-          _cube->setLed(layer, ledID, 0b000101);
+          _cube->setLed(layer, ledID, COL_LIGHT_GREEN);
 
         } else if (_cube->getLed(25 * (layer + 1) + ledID) > 0){
-          _cube->setLed(layer, ledID, 0b000100);
+          _cube->setLed(layer, ledID, COL_GREEN);
 
         } else {
           _cube->setLed(layer, ledID, 0);

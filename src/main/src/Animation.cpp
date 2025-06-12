@@ -34,7 +34,7 @@ void Animation::showNextFrame() {
   if (refreshIsToEarly()) {
       return;
   }
-  _writer->writeCube();
+  _writer->writeCube(_dimmingFactor);
 }
 
 // checks if the current frame is to early

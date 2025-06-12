@@ -2,13 +2,13 @@
 #ifndef SineAnimation_h
 #define SineAnimation_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class SineAnimation:public Animation {
     private:
         float sineCounter = 0;
         float edge = PI * 3 / 5;
-        byte sineColors[5] = {0b000001, 0b000101, 0b000100, 0b010100, 0b010000};
+        byte sineColors[5] = {0b000011, 0b001111, 0b001100, 0b111100, 0b110000};
     public:
         void renderNextFrame();
         SineAnimation();

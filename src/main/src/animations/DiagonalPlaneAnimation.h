@@ -2,7 +2,7 @@
 #ifndef DiagonalPlaneAnimation_h
 #define DiagonalPlaneAnimation_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class DiagonalPlaneAnimation:public Animation {
     private:

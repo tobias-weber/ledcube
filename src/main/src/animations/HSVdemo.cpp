@@ -20,6 +20,10 @@ void HSVdemo::renderNextFrame() {
 
     if(_cube->getLed(0) == 0) _cube->setLeds(COL_WHITE); // in the beginning, set the cube to white
 
+    if (digitalRead(btnXPin) && isBtnYReleased()) {
+      _cube->setBlock(3, COL_CYAN, true, true, true);
+    }
+
     byte calibratedY = getCalibratedY();
     for (byte x = 0; x < 5; x++) {
       for (byte y = 0; y < 5; y++) {
@@ -51,6 +55,28 @@ int HSVdemo::getCalibratedY() {
   return calibratedVal;
 }
 
+bool HSVdemo::isBtnXReleased() {
+  bool isPressed = digitalRead(btnXPin);
+  if (isPressed) {
+    btnXPressed = true;
+  } else if (btnXPressed){
+    btnXPressed = false;
+    return true;
+  }
+  return false;
+}
+
+bool HSVdemo::isBtnYReleased() {
+  bool isPressed = digitalRead(btnYPin);
+  if (isPressed) {
+    btnYPressed = true;
+  } else if (btnYPressed){
+    btnYPressed = false;
+    return true;
+  }
+  return false;
+}
+
 // C O N S T R U C T O R
 HSVdemo::HSVdemo() {
   // Initialize class variables declared in the header files here.
@@ -64,4 +90,6 @@ HSVdemo::HSVdemo() {
   
   joyYPin = A1;
   joyXPin = A2;
+  btnXPin = A3;
+  btnYPin = A4;
 }

@@ -2,7 +2,7 @@
 #ifndef ScreenSaver_h
 #define ScreenSaver_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class ScreenSaver:public Animation {
     private:

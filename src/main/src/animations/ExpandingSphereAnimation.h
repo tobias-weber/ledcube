@@ -2,7 +2,7 @@
 #ifndef ExpandingSphereAnimation_h
 #define ExpandingSphereAnimation_h
 
-#include "Animation.h"
+#include "../Animation.h"
 
 class ExpandingSphereAnimation:public Animation {
     private:
